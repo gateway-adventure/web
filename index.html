@@ -1,99 +1,47 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Unity WebGL Player | GAAPP</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | GAAPP</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #231F20;
+      }
 
-  <!-- IMPORTANT for iOS -->
-  <meta name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1.0,
-        maximum-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #231F20;
-    }
-
-    #unity-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-      background: #231F20;
-    }
-
-    /* REAL iOS INPUT */
-    #ios-input {
-      position: fixed;
-      left: 10px;
-      bottom: 20px;
-      width: calc(100% - 20px);
-      font-size: 18px;
-      padding: 8px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-      display: none;
-      z-index: 9999;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- REAL HTML INPUT (FIXES iOS KEYBOARD BUG) -->
-  <input id="ios-input" type="text" autocomplete="off" />
-
-  <!-- UNITY CANVAS -->
-  <canvas id="unity-canvas" tabindex="-1"></canvas>
-
-  <script src="Build/web.loader.js"></script>
-
-  <script>
-    let unityInstance = null;
-
-    createUnityInstance(document.querySelector("#unity-canvas"), {
-      dataUrl: "Build/web.data",
-      frameworkUrl: "Build/web.framework.js",
-      codeUrl: "Build/web.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Gateway adventure",
-      productName: "GAAPP",
-      productVersion: "2025122200",
-    }).then((instance) => {
-      unityInstance = instance;
-    });
-
-    /* ===== iOS INPUT BRIDGE ===== */
-
-    window.showIOSInput = function () {
-      const input = document.getElementById("ios-input");
-      if (!input) return;
-      input.style.display = "block";
-      input.value = "";
-      input.focus();
-    };
-
-    window.hideIOSInput = function () {
-      const input = document.getElementById("ios-input");
-      if (!input) return;
-      input.blur();
-      input.style.display = "none";
-    };
-
-    window.getIOSInputValue = function () {
-      const input = document.getElementById("ios-input");
-      return input ? input.value : "";
-    };
-  </script>
-
-</body>
+      #unity-canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <script src="Build/web.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/web.data",
+        frameworkUrl: "Build/web.framework.js",
+        codeUrl: "Build/web.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Gateway adventure",
+        productName: "GAAPP",
+        productVersion: "2025122200",
+      }).then((unityInstance) => {
+        // Unity instance loaded successfully
+      }).catch((message) => {
+        alert(message);
+      });
+    </script>
+  </body>
 </html>

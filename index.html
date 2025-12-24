@@ -4,10 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | GAAPP</title>
-
-    <meta name="viewport"
-          content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
     <style>
       html, body {
         margin: 0;
@@ -18,7 +15,6 @@
         background: #231F20;
       }
 
-      /* Unity canvas */
       #unity-canvas {
         width: 100% !important;
         height: 100% !important;
@@ -26,22 +22,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        touch-action: none; /* disable browser gestures */
-      }
-
-      /* Prevent mobile zoom + allow normal taps */
-      input,
-      textarea,
-      select {
-        font-size: 16px !important;
-        touch-action: manipulation;
       }
     </style>
   </head>
-
   <body>
     <canvas id="unity-canvas" tabindex="-1"></canvas>
-
     <script src="Build/web.loader.js"></script>
     <script>
       createUnityInstance(document.querySelector("#unity-canvas"), {
@@ -53,7 +38,7 @@
         productName: "GAAPP",
         productVersion: "2025122200",
       }).then((unityInstance) => {
-        // Unity loaded successfully
+        // Unity instance loaded successfully
       }).catch((message) => {
         alert(message);
       });

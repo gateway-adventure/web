@@ -1,185 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-    <title>GatewayAdventure | GAAPP</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            background: #231F20;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | GAAPP</title>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #231F20;
+      font-family: Arial, sans-serif;
+    }
 
-        #unity-canvas {
-            width: 100% !important;
-            height: 500px; /* fixed height for homepage layout */
-            display: block;
-        }
+    #unity-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
-        main {
-            padding: 20px;
-            background: #fff;
-            color: #000;
-        }
+    /* Spinner Overlay */
+    #loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #231F20;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+      color: #fff;
+    }
 
-        header, nav ul {
-            margin: 0;
-            padding: 0;
-        }
+    /* Spinner Animation */
+    .spinner {
+      border: 8px solid #444; /* Darker outer ring */
+      border-top: 8px solid #00BFFF; /* Bright color for spinning part */
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 1.2s linear infinite;
+      margin-bottom: 20px;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        section {
-            margin-bottom: 40px;
-        }
-
-        h1, h2 {
-            color: #231F20;
-        }
-
-        a {
-            color: #007BFF;
-            text-decoration: none;
-            margin-right: 10px;
-        }
-    </style>
+    #loading-text {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Unity WebGL Player -->
-    <canvas id="unity-canvas" tabindex="-1"></canvas>
-    <script src="Build/web.loader.js"></script>
-    <script>
-        createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/web.data",
-            frameworkUrl: "Build/web.framework.js",
-            codeUrl: "Build/web.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "Gateway Adventure",
-            productName: "GAAPP",
-            productVersion: "2026010500",
-        }).then((unityInstance) => {
-            console.log("Unity loaded successfully");
-        }).catch((message) => {
-            alert(message);
-        });
-    </script>
+  <!-- Unity Canvas -->
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
 
-    <!-- Website Header -->
-    <header>
-        <h1>GatewayAdventure</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="privacy.html">Privacy Policy</a></li>
-                <li><a href="terms.html">Terms of Service</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Loading Overlay -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div id="loading-text">Loading GatewayAdventure...</div>
+  </div>
 
-    <main>
+  <script src="Build/web.loader.js"></script>
+  <script>
+    const loadingOverlay = document.getElementById('loading-overlay');
 
-        <!-- Hero Section -->
-        <section>
-            <h2>Your gateway to unforgettable adventures</h2>
-            <p><strong>Explore. Plan. Go.</strong></p>
-            <p>
-                <strong>GatewayAdventure is an app that helps users discover, plan, and book outdoor adventures and experiences anywhere in the world.</strong>
-            </p>
-            <p>
-                Discover epic outdoor experiences, hidden local adventures, 
-                and once-in-a-lifetime trips—all in one app.
-            </p>
-            <a href="#">Start Your Adventure</a> |
-            <a href="#">Browse Destinations</a>
-        </section>
-
-        <!-- Discover Section -->
-        <section>
-            <h2>Discover Adventures That Fit You</h2>
-            <p>
-                From weekend escapes to bucket-list expeditions, GatewayAdventure 
-                helps you find experiences that match your vibe.
-            </p>
-            <ul>
-                <li>🥾 Hiking & trekking</li>
-                <li>🏄 Water sports & ocean adventures</li>
-                <li>🏔️ Mountain, snow & extreme sports</li>
-                <li>🏕️ Camping, glamping & nature stays</li>
-                <li>🌆 Local adventures near you</li>
-            </ul>
-        </section>
-
-        <!-- Planning Section -->
-        <section>
-            <h2>Smart Planning, Zero Stress</h2>
-            <ul>
-                <li>Personalized recommendations</li>
-                <li>Curated itineraries</li>
-                <li>Real traveler reviews</li>
-                <li>Offline access to plans & maps</li>
-                <li>Safety tips and local insights</li>
-            </ul>
-        </section>
-
-        <!-- Testimonials -->
-        <section>
-            <h2>Adventures Rated by Real Explorers</h2>
-            <blockquote>
-                “GatewayAdventure helped me find a hidden canyon hike I’d never heard of.
-                Best weekend ever.”
-                <br>— Alex M.
-            </blockquote>
-            <blockquote>
-                “Everything from planning to booking was stupidly easy.”
-                <br>— Priya S.
-            </blockquote>
-        </section>
-
-        <!-- Featured Adventures -->
-        <section>
-            <h2>Featured Adventures</h2>
-            <ul>
-                <li>Sunrise Volcano Trek – Bali</li>
-                <li>Desert Stargazing Camp – Utah</li>
-                <li>Kayak & Cliff Jump Tour – Croatia</li>
-                <li>Snowmobile Arctic Night Ride – Norway</li>
-            </ul>
-            <a href="#">See All Adventures</a>
-        </section>
-
-        <!-- Why Section -->
-        <section>
-            <h2>Why GatewayAdventure?</h2>
-            <ul>
-                <li>Hand-picked experiences</li>
-                <li>Trusted local guides</li>
-                <li>Transparent pricing</li>
-                <li>Built for beginners and adrenaline junkies</li>
-            </ul>
-        </section>
-
-        <!-- Download CTA -->
-        <section>
-            <h2>Adventure Is One Tap Away</h2>
-            <p>
-                Download GatewayAdventure and turn “someday” into <strong>this weekend</strong>.
-            </p>
-            <a href="#">Download on the App Store</a><br>
-            <a href="#">Get it on Google Play</a>
-        </section>
-
-    </main>
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/web.data",
+      frameworkUrl: "Build/web.framework.js",
+      codeUrl: "Build/web.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Gateway adventure",
+      productName: "GAAPP",
+      productVersion: "2026010500",
+    }).then((unityInstance) => {
+      // Unity instance loaded successfully
+      loadingOverlay.style.display = 'none'; // Hide spinner
+    }).catch((message) => {
+      alert(message);
+    });
+  </script>
 
 </body>
 </html>
+

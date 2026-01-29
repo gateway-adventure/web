@@ -1,61 +1,81 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | GAAPP</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        background: #231F20;
-      }
-
-      #unity-canvas {
-        width: 100% !important;
-        height: 100% !important;
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="unity-canvas" tabindex="-1"></canvas>
-    <script src="Build/web.loader.js"></script>
-    <script>
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/web.data",
-        frameworkUrl: "Build/web.framework.js",
-        codeUrl: "Build/web.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "Gateway adventure",
-        productName: "GAAPP",
-        productVersion: "2026010500",
-      }).then((unityInstance) => {
-        // Unity instance loaded successfully
-      }).catch((message) => {
-        alert(message);
-      });
-    </script>
-  </body>
-</html>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GatewayAdventure</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <title>GatewayAdventure | GAAPP</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: #231F20;
+            font-family: Arial, sans-serif;
+        }
+
+        #unity-canvas {
+            width: 100% !important;
+            height: 500px; /* fixed height for homepage layout */
+            display: block;
+        }
+
+        main {
+            padding: 20px;
+            background: #fff;
+            color: #000;
+        }
+
+        header, nav ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h1, h2 {
+            color: #231F20;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Unity WebGL Player -->
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <script src="Build/web.loader.js"></script>
+    <script>
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            dataUrl: "Build/web.data",
+            frameworkUrl: "Build/web.framework.js",
+            codeUrl: "Build/web.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "Gateway Adventure",
+            productName: "GAAPP",
+            productVersion: "2026010500",
+        }).then((unityInstance) => {
+            console.log("Unity loaded successfully");
+        }).catch((message) => {
+            alert(message);
+        });
+    </script>
+
+    <!-- Website Header -->
     <header>
         <h1>GatewayAdventure</h1>
         <nav>
@@ -73,6 +93,9 @@
         <section>
             <h2>Your gateway to unforgettable adventures</h2>
             <p><strong>Explore. Plan. Go.</strong></p>
+            <p>
+                <strong>GatewayAdventure is an app that helps users discover, plan, and book outdoor adventures and experiences anywhere in the world.</strong>
+            </p>
             <p>
                 Discover epic outdoor experiences, hidden local adventures, 
                 and once-in-a-lifetime trips—all in one app.
@@ -158,11 +181,5 @@
 
     </main>
 
-    <!-- <footer>
-        <p>&copy; 2026 GatewayAdventure. All rights reserved.</p>
-    </footer> -->
-
 </body>
 </html>
-
-

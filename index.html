@@ -24,10 +24,10 @@
     #unity-canvas {
       width: 100%;
       height: 100%;
-      display: block;
       position: absolute;
       top: 0;
       left: 0;
+      display: block;
     }
 
     /* Loading Overlay */
@@ -50,8 +50,8 @@
     }
 
     .loading-content h1 {
-      margin-bottom: 16px;
       font-size: 32px;
+      margin-bottom: 16px;
     }
 
     .loading-content p {
@@ -61,8 +61,8 @@
     }
 
     .tagline {
-      margin-top: 18px;
       font-weight: bold;
+      margin-top: 18px;
       color: #ffffff;
     }
 
@@ -79,6 +79,28 @@
 
     @keyframes spin {
       to { transform: rotate(360deg); }
+    }
+
+    /* Compliance Footer */
+    #compliance-footer {
+      position: fixed;
+      bottom: 10px;
+      right: 14px;
+      z-index: 20;
+      font-size: 13px;
+      color: #ccc;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    #compliance-footer a {
+      color: #9ad1ff;
+      text-decoration: none;
+    }
+
+    #compliance-footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -114,6 +136,11 @@
   <!-- Unity Canvas -->
   <canvas id="unity-canvas" tabindex="-1"></canvas>
 
+  <!-- Compliance Footer (REQUIRED) -->
+  <div id="compliance-footer">
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+
   <script src="Build/web.loader.js"></script>
   <script>
     createUnityInstance(
@@ -128,7 +155,6 @@
         productVersion: "2026010500"
       }
     ).then(() => {
-      // Hide loading screen when Unity is ready
       document.getElementById("loading-overlay").style.display = "none";
     }).catch((message) => {
       alert(message);

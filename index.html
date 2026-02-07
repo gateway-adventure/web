@@ -47,6 +47,16 @@
     .loading-content {
       max-width: 800px;
       color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .loading-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .loading-content h1 {
@@ -81,25 +91,20 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Compliance Footer */
-    #compliance-footer {
-      position: fixed;
-      bottom: 10px;
-      right: 14px;
-      z-index: 20;
+    /* Footer INSIDE loading screen only */
+    .loading-footer {
       font-size: 13px;
-      color: #ccc;
-      background: rgba(0, 0, 0, 0.45);
-      padding: 6px 10px;
-      border-radius: 6px;
+      color: #aaa;
+      padding-top: 20px;
     }
 
-    #compliance-footer a {
+    .loading-footer a {
       color: #9ad1ff;
       text-decoration: none;
+      margin: 0 8px;
     }
 
-    #compliance-footer a:hover {
+    .loading-footer a:hover {
       text-decoration: underline;
     }
   </style>
@@ -109,37 +114,42 @@
   <!-- Loading Screen -->
   <div id="loading-overlay">
     <div class="loading-content">
-      <h1>Gateway Adventure App</h1>
 
-      <p>
-        The Gateway Adventure App (GAAPP) is your all-in-one platform for creating
-        and experiencing unforgettable adventures. With a wide range of customizable
-        components, you can build scavenger hunts, escape rooms, and more—perfect for
-        everyday fun, date nights, parties, or special events.
-      </p>
+      <div class="loading-main">
+        <h1>Gateway Adventure App</h1>
 
-      <p>
-        Share your creations with friends, family, and the wider online community.
-        Gateway also offers built-in adventures for everyone to enjoy, from photo
-        challenges to brain-teasing puzzles. Designed for all ages, there’s always
-        something new to discover.
-      </p>
+        <p>
+          The Gateway Adventure App (GAAPP) is your all-in-one platform for creating
+          and experiencing unforgettable adventures. With a wide range of customizable
+          components, you can build scavenger hunts, escape rooms, and more—perfect for
+          everyday fun, date nights, parties, or special events.
+        </p>
 
-      <p class="tagline">
-        Your Gateway to Adventure starts here—jump in and start today.
-      </p>
+        <p>
+          Share your creations with friends, family, and the wider online community.
+          Gateway also offers built-in adventures for everyone to enjoy, from photo
+          challenges to brain-teasing puzzles. Designed for all ages, there’s always
+          something new to discover.
+        </p>
 
-      <div class="spinner"></div>
+        <p class="tagline">
+          Your Gateway to Adventure starts here—jump in and start today.
+        </p>
+
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Compliance links (ONLY visible during loading) -->
+      <div class="loading-footer">
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms of Service</a>
+      </div>
+
     </div>
   </div>
 
   <!-- Unity Canvas -->
   <canvas id="unity-canvas" tabindex="-1"></canvas>
-
-  <!-- Compliance Footer (REQUIRED) -->
-  <div id="compliance-footer">
-    <a href="privacy.html">Privacy Policy</a>
-  </div>
 
   <script src="Build/web.loader.js"></script>
   <script>
@@ -155,7 +165,8 @@
         productVersion: "2026010500"
       }
     ).then(() => {
-      document.getElementById("loading-overlay").style.display = "none";
+      // Remove loading screen entirely once Unity is ready
+      document.getElementById("loading-overlay").remove();
     }).catch((message) => {
       alert(message);
     });

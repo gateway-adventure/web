@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+    <!DOCTYPE html>
             <html lang="en-us">
             <head>
             <meta charset="utf-8">
@@ -6,7 +6,7 @@
             <title>GAAPP | </title>
 
             <meta name="viewport"
-                    content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+                    content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes, interactive-widget=resizes-content">
 
             <style>
                 html, body {
@@ -21,7 +21,7 @@
                 /* Unity Canvas */
                 #unity-container {
                 width: 100%;
-                height: 100svh;
+                height: 100dvh; /* dvh updates when iOS keyboard appears, svh does not */
                 position: relative;
                 }
 
@@ -107,6 +107,22 @@
 
                 .loading-footer a:hover {
                 text-decoration: underline;
+                }
+
+                /* iOS WebKit keyboard fix — keeps Unity's hidden input proxy
+                   inside the visible viewport so iOS attaches the edit bar toolbar.
+                   Without this the Done/Next bar disappears on all iOS browsers. */
+                input[data-ios-fix="active"],
+                textarea[data-ios-fix="active"] {
+                position: fixed !important;
+                top: 0px !important;
+                left: 0px !important;
+                width: 1px !important;
+                height: 1px !important;
+                opacity: 0 !important;
+                z-index: -1 !important;
+                pointer-events: none !important;
+                font-size: 16px !important; /* prevents iOS auto-zoom */
                 }
             </style>
             </head>

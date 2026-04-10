@@ -151,16 +151,16 @@
   <!-- Unity Canvas -->
   <canvas id="unity-canvas" tabindex="-1"></canvas>
 
-  <script src="Build/Test.loader.js"></script>
+  <script src="Build/Web.loader.js"></script>
   <script>
     createUnityInstance(document.querySelector("#unity-canvas"), {
-      dataUrl: "Build/Test.data",
-      frameworkUrl: "Build/Test.framework.js",
-      codeUrl: "Build/Test.wasm",
+      dataUrl: "Build/Web.data",
+      frameworkUrl: "Build/Web.framework.js",
+      codeUrl: "Build/Web.wasm",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "Gateway adventure",
       productName: "GAAPP",
-      productVersion: "2026032600",
+      productVersion: "2026041000",
     }).then(() => {
       // Remove loading screen once Unity is ready
       document.getElementById("loading-overlay").remove();

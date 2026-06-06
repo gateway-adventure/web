@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -18,6 +17,23 @@
       overflow: hidden;
       background: #231F20;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* 🔥 IMPORTANT: always visible compliance bar */
+    .compliance-bar {
+      position: relative;
+      z-index: 99999;
+      background: #ffffff;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .compliance-bar a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
     }
 
     #unity-canvas {
@@ -75,10 +91,6 @@
       margin: 0 12px;
     }
 
-    .legal-links a:hover {
-      text-decoration: underline;
-    }
-
     .button {
       display: inline-block;
       padding: 14px 28px;
@@ -92,8 +104,8 @@
       margin-top: 20px;
     }
 
-    .button:hover {
-      background: #0062d1;
+    #loading-status {
+      display: none;
     }
 
     .spinner {
@@ -107,53 +119,47 @@
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    #loading-status {
-      display: none;
-    }
-
-    .loading-footer {
-      margin-top: 30px;
-      color: #aaa;
-      font-size: 13px;
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 
 <body>
 
+<!-- 🔥 CRITICAL: visible to ALL crawlers immediately -->
+<div class="compliance-bar">
+  <a href="https://gatewayadventure.app/privacy.html">Privacy Policy</a>
+  |
+  <a href="https://gatewayadventure.app/terms.html">Terms of Service</a>
+</div>
+
 <div id="loading-overlay">
   <div class="loading-content">
 
     <h1>Gateway Adventure App</h1>
 
-    <!-- IMPORTANT: Keep these visible on the homepage -->
-    <div class="legal-links">
-      <a href="https://gatewayadventure.app/privacy" target="_blank" rel="noopener">
-        Privacy Policy
-      </a>
-
-      |
-
-      <a href="https://gatewayadventure.app/terms" target="_blank" rel="noopener">
-        Terms of Service
-      </a>
-    </div>
-
     <p>
       The Gateway Adventure App (GAAPP) is in early development.
-      This all-in-one platform for creating and experiencing
-      unforgettable adventures can be used to build scavenger hunts,
-      escape rooms, and more.
+      This platform allows users to create and experience interactive adventures,
+      scavenger hunts, and escape-room style games.
     </p>
 
     <p class="tagline">
       Your Gateway to Adventure starts here.
     </p>
+
+    <!-- keep inside UI too (extra redundancy helps approval) -->
+    <div class="legal-links">
+      <a href="https://gatewayadventure.app/privacy.html" target="_blank" rel="noopener">
+        Privacy Policy
+      </a>
+
+      |
+
+      <a href="https://gatewayadventure.app/terms.html" target="_blank" rel="noopener">
+        Terms of Service
+      </a>
+    </div>
 
     <button id="load-app-btn" class="button">
       Load App
@@ -162,10 +168,6 @@
     <div id="loading-status">
       <div class="spinner"></div>
       <p>Loading Unity...</p>
-    </div>
-
-    <div class="loading-footer">
-      © 2026 Gateway Adventure App
     </div>
 
   </div>
@@ -205,4 +207,3 @@
 
 </body>
 </html>
-```

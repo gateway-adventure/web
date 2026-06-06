@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>GAAPP</title>
+  <title>GAAPP - Gateway Adventure App</title>
 
   <meta name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
@@ -43,25 +43,40 @@
     }
 
     .loading-content {
-      max-width: 800px;
+      max-width: 900px;
       color: white;
     }
 
-    .loading-content h1 {
+    h1 {
       font-size: 32px;
       margin-bottom: 16px;
     }
 
-    .loading-content p {
+    p {
       color: #cccccc;
       line-height: 1.6;
-      margin-bottom: 14px;
     }
 
     .tagline {
       font-weight: bold;
       color: white;
       margin-top: 20px;
+    }
+
+    .legal-links {
+      margin: 20px 0;
+      font-size: 16px;
+    }
+
+    .legal-links a {
+      color: #4db8ff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 12px;
+    }
+
+    .legal-links a:hover {
+      text-decoration: underline;
     }
 
     .button {
@@ -102,15 +117,9 @@
     }
 
     .loading-footer {
-      margin-top: 40px;
-      font-size: 13px;
+      margin-top: 30px;
       color: #aaa;
-    }
-
-    .loading-footer a {
-      color: #9ad1ff;
-      text-decoration: none;
-      margin: 0 8px;
+      font-size: 13px;
     }
   </style>
 </head>
@@ -121,6 +130,19 @@
   <div class="loading-content">
 
     <h1>Gateway Adventure App</h1>
+
+    <!-- IMPORTANT: Keep these visible on the homepage -->
+    <div class="legal-links">
+      <a href="https://yourdomain.com/privacy.html" target="_blank" rel="noopener">
+        Privacy Policy
+      </a>
+
+      |
+
+      <a href="https://yourdomain.com/terms.html" target="_blank" rel="noopener">
+        Terms of Service
+      </a>
+    </div>
 
     <p>
       The Gateway Adventure App (GAAPP) is in early development.
@@ -143,8 +165,7 @@
     </div>
 
     <div class="loading-footer">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
+      © 2026 Gateway Adventure App
     </div>
 
   </div>
@@ -165,7 +186,7 @@
       frameworkUrl: "Build/Web.framework.js",
       codeUrl: "Build/Web.wasm",
       streamingAssetsUrl: "StreamingAssets",
-      companyName: "Gateway adventure",
+      companyName: "Gateway Adventure",
       productName: "GAAPP",
       productVersion: "2026041000"
     })

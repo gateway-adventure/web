@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+
+<title>GAAPP Application</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #231F20;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#unity-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #231F20;
+}
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #231F20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.loading-container {
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #cccccc;
+    margin-bottom: 30px;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border: 5px solid #444;
+    border-top: 5px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.progress-bar {
+    width: 100%;
+    max-width: 400px;
+    height: 12px;
+    background: #444;
+    border-radius: 20px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #0078ff;
+    transition: width 0.2s ease;
+}
+
+.loading-text {
+    margin-top: 15px;
+    color: #cccccc;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: #7fc1ff;
+    text-decoration: none;
+}
+
+.error-message {
+    color: #ff6b6b;
+    margin-top: 20px;
+    display: none;
+}
+
+.retry-btn {
+    margin-top: 15px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    background: #0078ff;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading-screen">
+    <div class="loading-container">
+
+        <div class="logo">GAAPP</div>
+
+        <div class="subtitle">
+            Gateway Adventure App
+        </div>
+
+        <div class="spinner"></div>
+
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+
+        <div id="loading-text" class="loading-text">
+            Loading application...
+        </div>
+
+        <div id="error-message" class="error-message"></div>
+
+        <button id="retry-btn" class="retry-btn">
+            Retry Loading
+        </button>
+
+        <br>
+
+        <a href="/" class="back-link">
+            ← Return to Homepage
+        </a>
+
+    </div>
+</div>
+
+<canvas id="unity-canvas" tabindex="-1"></canvas>
+
+<script src="Build/Web.loader.js"></script>
+
+<script>
+function loadUnity() {
+
+    const progressBar = document.getElementById("progress-fill");
+    const loadingText = document.getElementById("loading-text");
+    const errorMessage = document.getElementById("error-message");
+    const retryBtn = document.getElementById("retry-btn");
+
+    errorMessage.style.display = "none";
+    retryBtn.style.display = "none";
+
+    createUnityInstance(
+        document.querySelector("#unity-canvas"),
+        {
+            dataUrl: "Build/Web.data",
+            frameworkUrl: "Build/Web.framework.js",
+            codeUrl: "Build/Web.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+
+            companyName: "Gateway Adventure",
+            productName: "GAAPP",
+            productVersion: "2026041000"
+        },
+
+        (progress) => {
+
+            const percent = Math.round(progress * 100);
+
+            progressBar.style.width = percent + "%";
+            loadingText.textContent =
+                "Loading application... " + percent + "%";
+        }
+
+    )
+    .then((unityInstance) => {
+
+        document.getElementById("loading-screen").style.display = "none";
+
+        window.unityInstance = unityInstance;
+
+    })
+    .catch((message) => {
+
+        errorMessage.textContent =
+            "Failed to load application. " + message;
+
+        errorMessage.style.display = "block";
+
+        retryBtn.style.display = "inline-block";
+    });
+}
+//ll
+document.getElementById("retry-btn")
+    .addEventListener("click", loadUnity);
+
+loadUnity();
+</script>
+
+</body>
+</html>

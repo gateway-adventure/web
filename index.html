@@ -1,265 +1,187 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAAPP - Gateway Adventure App</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>GAAPP</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #231F20;
-    color: white;
-    line-height: 1.6;
-}
-
-header {
-    background: #1b1718;
-    padding: 20px;
-    border-bottom: 1px solid #333;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo {
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.tagline {
-    color: #ccc;
-    margin-top: 8px;
-}
-
-.hero {
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    max-width: 800px;
-    margin: 0 auto 30px;
-    color: #d0d0d0;
-    font-size: 18px;
-}
-
-.button {
-    display: inline-block;
-    background: #0078ff;
-    color: white;
-    text-decoration: none;
-    padding: 16px 32px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.button:hover {
-    background: #0060d0;
-}
-
-.section {
-    padding: 70px 20px;
-}
-
-.section h2 {
-    margin-bottom: 20px;
-    font-size: 32px;
-}
-
-.section p {
-    color: #d0d0d0;
-    margin-bottom: 16px;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.feature {
-    background: #2b2728;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.feature h3 {
-    margin-bottom: 12px;
-}
-
-.feature p {
-    margin: 0;
-}
-
-.links {
-    margin-top: 30px;
-}
-
-.links a {
-    color: #7fc1ff;
-    margin-right: 20px;
-    text-decoration: none;
-}
-
-footer {
-    border-top: 1px solid #333;
-    padding: 40px 20px;
-    text-align: center;
-    color: #aaa;
-}
-
-footer a {
-    color: #7fc1ff;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 34px;
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #231F20;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .hero p {
-        font-size: 16px;
+    #unity-canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
     }
-}
-</style>
+
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: #231F20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      text-align: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .loading-content {
+      max-width: 800px;
+      color: white;
+    }
+
+    .loading-content h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .loading-content p {
+      color: #cccccc;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .tagline {
+      font-weight: bold;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: #0078ff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .button:hover {
+      background: #0062d1;
+    }
+
+    .spinner {
+      margin: 20px auto;
+      width: 48px;
+      height: 48px;
+      border: 4px solid #444;
+      border-top: 4px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #loading-status {
+      display: none;
+    }
+
+    .loading-footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .loading-footer a {
+      color: #9ad1ff;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo">GAAPP</div>
-        <div class="tagline">Gateway Adventure App</div>
-    </div>
-</header>
+<div id="loading-overlay">
+  <div class="loading-content">
 
-<section class="hero">
-    <div class="container">
-        <h1>Your Gateway to Adventure</h1>
+    <h1>Gateway Adventure App</h1>
 
-        <p>
-            GAAPP (Gateway Adventure App) is an interactive platform for
-            creating, managing, and participating in immersive adventures,
-            scavenger hunts, escape room experiences, educational activities,
-            and location-based games.
-        </p>
-
-        <a class="button" href="app.html">
-            Launch Application
-        </a>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <h2>About GAAPP</h2>
-
-        <p>
-            GAAPP helps creators build engaging adventure experiences for
-            players of all ages. Whether you're organizing a community event,
-            educational challenge, team-building activity, or escape-room
-            style game, GAAPP provides the tools needed to design and manage
-            interactive experiences.
-        </p>
-
-        <p>
-            Participants can access adventures, complete challenges, solve
-            puzzles, and track their progress through the platform.
-        </p>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <h2>Features</h2>
-
-        <div class="features">
-
-            <div class="feature">
-                <h3>Create Adventures</h3>
-                <p>
-                    Design custom scavenger hunts, escape rooms, and
-                    interactive challenges.
-                </p>
-            </div>
-
-            <div class="feature">
-                <h3>Manage Participants</h3>
-                <p>
-                    Organize players, teams, and event participants.
-                </p>
-            </div>
-
-            <div class="feature">
-                <h3>Track Progress</h3>
-                <p>
-                    Monitor challenge completion and player achievements.
-                </p>
-            </div>
-
-            <div class="feature">
-                <h3>Share Experiences</h3>
-                <p>
-                    Publish and distribute adventures to your audience.
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-
-        <h2>Google Account Access</h2>
-
-        <p>
-            GAAPP uses Google Sign-In to authenticate users and provide secure
-            access to their accounts, adventures, saved progress, and content
-            management features.
-        </p>
-
-        <p>
-            Information obtained through Google Sign-In is used only for
-            account authentication and operation of the application as
-            described in our Privacy Policy. 
-        </p>
-
-        <div class="links">
-            <a href="/privacy.html">Privacy Policy</a>
-            <a href="/terms.html">Terms of Service</a>
-        </div>
-
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Gateway Adventure App (GAAPP)</p>
-
-    <p style="margin-top:12px;">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
+    <p>
+      The Gateway Adventure App (GAAPP) is in early development.
+      This all-in-one platform for creating and experiencing
+      unforgettable adventures can be used to build scavenger hunts,
+      escape rooms, and more.
     </p>
-</footer>
+
+    <p class="tagline">
+      Your Gateway to Adventure starts here.
+    </p>
+
+    <button id="load-app-btn" class="button">
+      Load App
+    </button>
+
+    <div id="loading-status">
+      <div class="spinner"></div>
+      <p>Loading Unity...</p>
+    </div>
+
+    <div class="loading-footer">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+
+  </div>
+</div>
+
+<canvas id="unity-canvas" tabindex="-1"></canvas>
+
+<script src="Build/Web.loader.js"></script>
+
+<script>
+  document.getElementById("load-app-btn").addEventListener("click", function () {
+
+    document.getElementById("load-app-btn").style.display = "none";
+    document.getElementById("loading-status").style.display = "block";
+
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/Web.data",
+      frameworkUrl: "Build/Web.framework.js",
+      codeUrl: "Build/Web.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Gateway adventure",
+      productName: "GAAPP",
+      productVersion: "2026041000"
+    })
+    .then(() => {
+      document.getElementById("loading-overlay").remove();
+    })
+    .catch((message) => {
+      alert(message);
+
+      document.getElementById("loading-status").style.display = "none";
+      document.getElementById("load-app-btn").style.display = "inline-block";
+    });
+
+  });
+</script>
 
 </body>
 </html>
+```

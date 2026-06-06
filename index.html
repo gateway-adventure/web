@@ -1,209 +1,36 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>GAAPP - Gateway Adventure App</title>
-
-  <meta name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #231F20;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* 🔥 IMPORTANT: always visible compliance bar */
-    .compliance-bar {
-      position: relative;
-      z-index: 99999;
-      background: #ffffff;
-      padding: 10px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .compliance-bar a {
-      color: #0066cc;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 10px;
-    }
-
-    #unity-canvas {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-    }
-
-    #loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: #231F20;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      text-align: center;
-      padding: 24px;
-      box-sizing: border-box;
-    }
-
-    .loading-content {
-      max-width: 900px;
-      color: white;
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-
-    p {
-      color: #cccccc;
-      line-height: 1.6;
-    }
-
-    .tagline {
-      font-weight: bold;
-      color: white;
-      margin-top: 20px;
-    }
-
-    .legal-links {
-      margin: 20px 0;
-      font-size: 16px;
-    }
-
-    .legal-links a {
-      color: #4db8ff;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 12px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      background: #0078ff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    #loading-status {
-      display: none;
-    }
-
-    .spinner {
-      margin: 20px auto;
-      width: 48px;
-      height: 48px;
-      border: 4px solid #444;
-      border-top: 4px solid #ffffff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gateway Adventure</title>
 </head>
 
-<body>
+<body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
 
-<!-- 🔥 CRITICAL: visible to ALL crawlers immediately -->
-<div class="compliance-bar">
-  <a href="https://gatewayadventure.app/privacy.html">Privacy Policy</a>
-  |
-  <a href="https://gatewayadventure.app/terms.html">Terms of Service</a>
-</div>
+  <h1>Gateway Adventure App</h1>
 
-<div id="loading-overlay">
-  <div class="loading-content">
+  <p>
+    Gateway Adventure is an interactive adventure platform for creating scavenger hunts and experiences.
+  </p>
 
-    <h1>Gateway Adventure App</h1>
+  <!-- 🔥 CRITICAL: MUST BE VISIBLE IN RAW HTML -->
+  <p style="margin-top:30px; font-size:18px;">
+    <a href="https://gatewayadventure.app/privacy.html">Privacy Policy</a>
+    |
+    <a href="https://gatewayadventure.app/terms.html">Terms of Service</a>
+  </p>
 
-    <p>
-      The Gateway Adventure App (GAAPP) is in early development.
-      This platform allows users to create and experience interactive adventures,
-      scavenger hunts, and escape-room style games.
-    </p>
+  <p style="margin-top:20px; color:#666;">
+    © 2026 Gateway Adventure
+  </p>
 
-    <p class="tagline">
-      Your Gateway to Adventure starts here.
-    </p>
-
-    <!-- keep inside UI too (extra redundancy helps approval) -->
-    <div class="legal-links">
-      <a href="https://gatewayadventure.app/privacy.html" target="_blank" rel="noopener">
-        Privacy Policy
-      </a>
-
-      |
-
-      <a href="https://gatewayadventure.app/terms.html" target="_blank" rel="noopener">
-        Terms of Service
-      </a>
-    </div>
-
-    <button id="load-app-btn" class="button">
-      Load App
-    </button>
-
-    <div id="loading-status">
-      <div class="spinner"></div>
-      <p>Loading Unity...</p>
-    </div>
-
-  </div>
-</div>
-
-<canvas id="unity-canvas" tabindex="-1"></canvas>
-
-<script src="Build/Web.loader.js"></script>
-
-<script>
-  document.getElementById("load-app-btn").addEventListener("click", function () {
-
-    document.getElementById("load-app-btn").style.display = "none";
-    document.getElementById("loading-status").style.display = "block";
-
-    createUnityInstance(document.querySelector("#unity-canvas"), {
-      dataUrl: "Build/Web.data",
-      frameworkUrl: "Build/Web.framework.js",
-      codeUrl: "Build/Web.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Gateway Adventure",
-      productName: "GAAPP",
-      productVersion: "2026041000"
-    })
-    .then(() => {
-      document.getElementById("loading-overlay").remove();
-    })
-    .catch((message) => {
-      alert(message);
-
-      document.getElementById("loading-status").style.display = "none";
-      document.getElementById("load-app-btn").style.display = "inline-block";
-    });
-
-  });
-</script>
+  <!-- optional redirect AFTER links (safe) -->
+  <script>
+    setTimeout(function () {
+      window.location.href = "/app.html";
+    }, 1500);
+  </script>
 
 </body>
 </html>

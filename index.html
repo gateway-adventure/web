@@ -1,36 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gateway Adventure</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAAPP - Gateway Adventure App</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #231F20;
+    color: white;
+    line-height: 1.6;
+}
+
+header {
+    background: #1b1718;
+    padding: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.tagline {
+    color: #ccc;
+    margin-top: 8px;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: #d0d0d0;
+    font-size: 18px;
+}
+
+.button {
+    display: inline-block;
+    background: #0078ff;
+    color: white;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.button:hover {
+    background: #0060d0;
+}
+
+.section {
+    padding: 70px 20px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.section p {
+    color: #d0d0d0;
+    margin-bottom: 16px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.feature {
+    background: #2b2728;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.feature h3 {
+    margin-bottom: 12px;
+}
+
+.feature p {
+    margin: 0;
+}
+
+.links {
+    margin-top: 30px;
+}
+
+.links a {
+    color: #7fc1ff;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+footer {
+    border-top: 1px solid #333;
+    padding: 40px 20px;
+    text-align: center;
+    color: #aaa;
+}
+
+footer a {
+    color: #7fc1ff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+}
+</style>
 </head>
 
-<body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
+<body>
 
-  <h1>Gateway Adventure App</h1>
+<header>
+    <div class="container">
+        <div class="logo">GAAPP</div>
+        <div class="tagline">Gateway Adventure App</div>
+    </div>
+</header>
 
-  <p>
-    Gateway Adventure is an interactive adventure platform for creating scavenger hunts and experiences.
-  </p>
+<section class="hero">
+    <div class="container">
+        <h1>Your Gateway to Adventure</h1>
 
-  <!-- 🔥 CRITICAL: MUST BE VISIBLE IN RAW HTML -->
-  <p style="margin-top:30px; font-size:18px;">
-    <a href="https://gatewayadventure.app/privacy.html">Privacy Policy</a>
-    |
-    <a href="https://gatewayadventure.app/terms.html">Terms of Service</a>
-  </p>
+        <p>
+            GAAPP (Gateway Adventure App) is an interactive platform for
+            creating, managing, and participating in immersive adventures,
+            scavenger hunts, escape room experiences, educational activities,
+            and location-based games.
+        </p>
 
-  <p style="margin-top:20px; color:#666;">
-    © 2026 Gateway Adventure
-  </p>
+        <a class="button" href="app.html">
+            Launch Application
+        </a>
+    </div>
+</section>
 
-  <!-- optional redirect AFTER links (safe) -->
-  <script>
-    setTimeout(function () {
-      window.location.href = "/app.html";
-    }, 1500);
-  </script>
+<section class="section">
+    <div class="container">
+        <h2>About GAAPP</h2>
+
+        <p>
+            GAAPP helps creators build engaging adventure experiences for
+            players of all ages. Whether you're organizing a community event,
+            educational challenge, team-building activity, or escape-room
+            style game, GAAPP provides the tools needed to design and manage
+            interactive experiences.
+        </p>
+
+        <p>
+            Participants can access adventures, complete challenges, solve
+            puzzles, and track their progress through the platform.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Features</h2>
+
+        <div class="features">
+
+            <div class="feature">
+                <h3>Create Adventures</h3>
+                <p>
+                    Design custom scavenger hunts, escape rooms, and
+                    interactive challenges.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Manage Participants</h3>
+                <p>
+                    Organize players, teams, and event participants.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Track Progress</h3>
+                <p>
+                    Monitor challenge completion and player achievements.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Share Experiences</h3>
+                <p>
+                    Publish and distribute adventures to your audience.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <h2>Google Account Access</h2>
+
+        <p>
+            GAAPP uses Google Sign-In to authenticate users and provide secure
+            access to their accounts, adventures, saved progress, and content
+            management features.
+        </p>
+
+        <p>
+            Information obtained through Google Sign-In is used only for
+            account authentication and operation of the application as
+            described in our Privacy Policy.
+        </p>
+
+        <div class="links">
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Gateway Adventure App (GAAPP)</p>
+
+    <p style="margin-top:12px;">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+    </p>
+</footer>
 
 </body>
 </html>

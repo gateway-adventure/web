@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>GAAPP</title>
+  <title>GAAPP | </title>
 
   <meta name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
@@ -20,15 +19,17 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    /* Unity Canvas */
     #unity-canvas {
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       position: absolute;
       top: 0;
       left: 0;
       display: block;
     }
 
+    /* Loading Overlay */
     #loading-overlay {
       position: fixed;
       inset: 0;
@@ -44,7 +45,17 @@
 
     .loading-content {
       max-width: 800px;
-      color: white;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .loading-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .loading-content h1 {
@@ -60,29 +71,13 @@
 
     .tagline {
       font-weight: bold;
-      color: white;
-      margin-top: 20px;
+      margin-top: 18px;
+      color: #ffffff;
     }
 
-    .button {
-      display: inline-block;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      background: #0078ff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    .button:hover {
-      background: #0062d1;
-    }
-
+    /* Spinner */
     .spinner {
-      margin: 20px auto;
+      margin: 30px auto 0;
       width: 48px;
       height: 48px;
       border: 4px solid #444;
@@ -92,19 +87,14 @@
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
-    #loading-status {
-      display: none;
-    }
-
+    /* Footer */
     .loading-footer {
-      margin-top: 40px;
       font-size: 13px;
       color: #aaa;
+      padding-top: 20px;
     }
 
     .loading-footer a {
@@ -112,54 +102,57 @@
       text-decoration: none;
       margin: 0 8px;
     }
+
+    .loading-footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
 <body>
 
-<div id="loading-overlay">
-  <div class="loading-content">
+  <!-- Loading Screen -->
+  <div id="loading-overlay">
+    <div class="loading-content">
 
-    <h1>Gateway Adventure App</h1>
+      <div class="loading-main">
+        <h1>Gateway Adventure App</h1>
 
-    <p>
-      The Gateway Adventure App (GAAPP) is in early development.
-      This all-in-one platform for creating and experiencing
-      unforgettable adventures can be used to build scavenger hunts,
-      escape rooms, and more. 
-    </p>
+        <p>
+          The Gateway Adventure App (GAAPP) is in early development. This all-in-one platform for creating
+          and experiencing unforgettable adventures can be used to build scavenger hunts,
+          escape rooms, and more— perfect for date nights, parties, or family outings.
+        </p>
 
-    <p class="tagline">
-      Your Gateway to Adventure starts here.
-    </p>
+<p>
+  If loading takes more than a few minutes, or you experience other bugs check out our YouTube playlist.
+</p>
 
-    <button id="load-app-btn" class="button">
-      Load App
-    </button>
+<a href="https://youtube.com/playlist?list=PLRB2I5-8wc3W8KIV0a06rMSWxIYZs7fcV&si=WKl03fCcY5acZRE9"
+   target="_blank"
+   class="button">
+  Bugs and Workarounds Playlist
+</a>
+        <p class="tagline">
+          Your Gateway to Adventure starts here.
+        </p>
 
-    <div id="loading-status">
-      <div class="spinner"></div>
-      <p>Loading Unity...</p>
+        <div class="spinner"></div>
+      </div>
+
+      <div class="loading-footer">
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms of Service</a>
+      </div>
+
     </div>
-
-    <div class="loading-footer">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-    </div>
-
   </div>
-</div>
 
-<canvas id="unity-canvas" tabindex="-1"></canvas>
+  <!-- Unity Canvas -->
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
 
-<script src="Build/Web.loader.js"></script>
-
-<script>
-  document.getElementById("load-app-btn").addEventListener("click", function () {
-
-    document.getElementById("load-app-btn").style.display = "none";
-    document.getElementById("loading-status").style.display = "block";
-
+  <script src="Build/Web.loader.js"></script>
+  <script>
     createUnityInstance(document.querySelector("#unity-canvas"), {
       dataUrl: "Build/Web.data",
       frameworkUrl: "Build/Web.framework.js",
@@ -167,21 +160,14 @@
       streamingAssetsUrl: "StreamingAssets",
       companyName: "Gateway adventure",
       productName: "GAAPP",
-      productVersion: "2026041000"
-    })
-    .then(() => {
+      productVersion: "2026041000",
+    }).then(() => {
+      // Remove loading screen once Unity is ready
       document.getElementById("loading-overlay").remove();
-    })
-    .catch((message) => {
+    }).catch((message) => {
       alert(message);
-
-      document.getElementById("loading-status").style.display = "none";
-      document.getElementById("load-app-btn").style.display = "inline-block";
     });
-
-  });
-</script>
+  </script>
 
 </body>
 </html>
-```

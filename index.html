@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
 
     <meta
         http-equiv="Content-Type"
         content="text/html; charset=utf-8"
     >
-
-    <title>Gateway Adventure</title>
 
     <meta
         name="viewport"
@@ -21,12 +18,42 @@
                  shrink-to-fit=yes"
     >
 
+    <title>Gateway Adventure</title>
+
+
+    <!-- =====================================================
+         FAVICON
+         Uses your 1800 × 1800 Logo.png
+         ===================================================== -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="1800x1800"
+        href="./Logo.png?v=3"
+    >
+
+    <link
+        rel="shortcut icon"
+        type="image/png"
+        href="./Logo.png?v=3"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="./Logo.png?v=3"
+    >
+
+
+    <!-- =====================================================
+         STYLES
+         ===================================================== -->
 
     <style>
 
-        /* =====================================================
+        /* =========================
            RESET
-           ===================================================== */
+           ========================= */
 
         * {
             margin: 0;
@@ -58,9 +85,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            UNITY CANVAS
-           ===================================================== */
+           ========================= */
 
         #unity-canvas {
 
@@ -77,9 +104,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            LOADING OVERLAY
-           ===================================================== */
+           ========================= */
 
         #loading-overlay {
 
@@ -113,9 +140,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            GAME AREA
-           ===================================================== */
+           ========================= */
 
         #gameArea {
 
@@ -137,9 +164,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            LOADING LOGO
-           ===================================================== */
+           ========================= */
 
         #player {
 
@@ -187,9 +214,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            LOGO IMAGE
-           ===================================================== */
+           ========================= */
 
         #player img {
 
@@ -211,168 +238,106 @@
         }
 
 
-        /* =====================================================
-           LOADING ANIMATION
-           ===================================================== */
+        /* =========================
+           LOADING REVEAL
+           ========================= */
 
         @keyframes logoLoaderReveal {
 
             0% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     0 0,
-
                     50% 0%,
-
                     50% 0%,
-
                     50% 0%,
-
                     50% 0%,
-
                     50% 0%
-
                 );
 
             }
-
 
             12.5% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     0 0,
-
                     50% 0%,
-
                     100% 0%,
-
                     100% 0%,
-
                     100% 0%,
-
                     100% 0%
-
                 );
 
             }
-
 
             25% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     0 0,
-
                     50% 0%,
-
                     100% 0%,
-
                     100% 100%,
-
                     100% 100%,
-
                     100% 100%
-
                 );
 
             }
-
 
             50% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     0 0,
-
                     50% 0%,
-
                     100% 0%,
-
                     100% 100%,
-
                     50% 100%,
-
                     0% 100%
-
                 );
 
             }
-
 
             62.5% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     100% 0,
-
                     100% 0%,
-
                     100% 0%,
-
                     100% 100%,
-
                     50% 100%,
-
                     0% 100%
-
                 );
 
             }
-
 
             75% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     100% 100%,
-
                     100% 100%,
-
                     100% 100%,
-
                     100% 100%,
-
                     50% 100%,
-
                     0% 100%
-
                 );
 
             }
 
-
             100% {
 
                 clip-path: polygon(
-
                     50% 50%,
-
                     50% 100%,
-
                     50% 100%,
-
                     50% 100%,
-
                     50% 100%,
-
                     50% 100%,
-
                     0% 100%
-
                 );
 
             }
@@ -380,9 +345,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            LOADING ROTATION
-           ===================================================== */
+           ========================= */
 
         @keyframes logoLoaderSpin {
 
@@ -395,7 +360,6 @@
 
             }
 
-
             49.99% {
 
                 transform:
@@ -405,7 +369,6 @@
 
             }
 
-
             50% {
 
                 transform:
@@ -414,7 +377,6 @@
                     rotate(0deg);
 
             }
-
 
             100% {
 
@@ -428,9 +390,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            GAME MODE PLAYER
-           ===================================================== */
+           ========================= */
 
         #player.game-mode {
 
@@ -457,9 +419,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            ENEMIES
-           ===================================================== */
+           ========================= */
 
         .enemy {
 
@@ -482,9 +444,9 @@
         }
 
 
-        /* =====================================================
+        /* =========================
            SCORE
-           ===================================================== */
+           ========================= */
 
         #score {
 
@@ -526,9 +488,56 @@
         }
 
 
-        /* =====================================================
-           MOBILE
-           ===================================================== */
+        /* =========================
+           DARK THEME
+           ========================= */
+
+        @media (prefers-color-scheme: dark) {
+
+            body {
+
+                background: black;
+
+            }
+
+            #loading-overlay {
+
+                background: white;
+
+            }
+
+            #gameArea {
+
+                background: black;
+
+            }
+
+            #player img {
+
+                filter: invert(0);
+
+            }
+
+            .enemy {
+
+                background: white;
+
+            }
+
+            #score {
+
+                background: white;
+
+                color: black;
+
+            }
+
+        }
+
+
+        /* =========================
+           SMALL SCREENS
+           ========================= */
 
         @media (max-width: 600px) {
 
@@ -538,13 +547,11 @@
 
             }
 
-
             #gameArea {
 
                 border-radius: 35px;
 
             }
-
 
             #player:not(.game-mode) {
 
@@ -553,7 +560,6 @@
             }
 
         }
-
 
     </style>
 
@@ -598,7 +604,7 @@
 
 
     <!-- =====================================================
-         UNITY
+         UNITY CANVAS
          ===================================================== -->
 
     <canvas
@@ -611,7 +617,9 @@
          UNITY LOADER
          ===================================================== -->
 
-    <script src="Build/31cdebeb6f9458304f376955767127ad.loader.js"></script>
+    <script
+        src="Build/31cdebeb6f9458304f376955767127ad.loader.js"
+    ></script>
 
 
     <script>
@@ -646,7 +654,7 @@
 
 
         /* =====================================================
-           CONFIG
+           CONFIGURATION
            ===================================================== */
 
         const CONFIG = {
@@ -665,7 +673,7 @@
 
 
         /* =====================================================
-           STATE
+           GAME STATE
            ===================================================== */
 
         let gameRunning = false;
@@ -673,6 +681,21 @@
         let dragging = false;
 
         let enemies = [];
+
+        /*
+            IMPORTANT:
+
+            This is the actual score.
+
+            It does NOT equal enemies.length.
+
+            enemies.length = enemies currently alive.
+
+            xpDots = total dots collected/spawned
+            during the current round.
+        */
+
+        let xpDots = 0;
 
         let playerX = 0;
 
@@ -686,7 +709,7 @@
 
 
         /* =====================================================
-           RESIZE
+           UPDATE AREA SIZE
            ===================================================== */
 
         function updateAreaSize() {
@@ -717,8 +740,14 @@
         ) {
 
             return Math.min(
-                Math.max(value, min),
+
+                Math.max(
+                    value,
+                    min
+                ),
+
                 max
+
             );
 
         }
@@ -767,8 +796,22 @@
 
 
             return Math.random() > 0.5
+
                 ? speed
+
                 : -speed;
+
+        }
+
+
+        /* =====================================================
+           UPDATE SCORE
+           ===================================================== */
+
+        function updateScore() {
+
+            score.textContent =
+                `XP Dots: ${xpDots}`;
 
         }
 
@@ -780,7 +823,9 @@
         function spawnEnemy() {
 
             if (!gameRunning) {
+
                 return;
+
             }
 
 
@@ -795,36 +840,39 @@
 
 
             const maxX =
+
                 Math.max(
+
                     0,
+
                     areaRect.width -
                     CONFIG.enemySize
+
                 );
 
 
             const maxY =
+
                 Math.max(
+
                     0,
+
                     areaRect.height -
                     CONFIG.enemySize
+
                 );
 
 
             /*
-                Start enemies near the
-                top-center score area.
+                Spawn near the top-center.
             */
 
             const x =
+
                 clamp(
 
-                    (
-                        areaRect.width / 2
-                    ) -
-
-                    (
-                        CONFIG.enemySize / 2
-                    ),
+                    areaRect.width / 2 -
+                    CONFIG.enemySize / 2,
 
                     0,
 
@@ -834,6 +882,7 @@
 
 
             const y =
+
                 clamp(
 
                     60,
@@ -883,19 +932,17 @@
             );
 
 
+            /*
+                ADD ONE XP DOT.
+
+                This is separate from
+                the enemies array.
+            */
+
+            xpDots++;
+
+
             updateScore();
-
-        }
-
-
-        /* =====================================================
-           SCORE
-           ===================================================== */
-
-        function updateScore() {
-
-            score.textContent =
-                `XP Dots: ${enemies.length}`;
 
         }
 
@@ -942,16 +989,28 @@
                     enemy.vy;
 
 
+                /*
+                    Bounce horizontally.
+                */
+
                 if (
+
                     enemy.x <= 0 ||
+
                     enemy.x >= maxX
+
                 ) {
 
                     enemy.x =
+
                         clamp(
+
                             enemy.x,
+
                             0,
+
                             maxX
+
                         );
 
 
@@ -960,16 +1019,28 @@
                 }
 
 
+                /*
+                    Bounce vertically.
+                */
+
                 if (
+
                     enemy.y <= 0 ||
+
                     enemy.y >= maxY
+
                 ) {
 
                     enemy.y =
+
                         clamp(
+
                             enemy.y,
+
                             0,
+
                             maxY
+
                         );
 
 
@@ -1010,13 +1081,9 @@
 
             const collisionDistance =
 
-                (
-                    CONFIG.playerSize / 2
-                ) +
+                CONFIG.playerSize / 2 +
 
-                (
-                    CONFIG.enemySize / 2
-                );
+                CONFIG.enemySize / 2;
 
 
             for (
@@ -1106,10 +1173,20 @@
             );
 
 
-            clearTimeout(
+            clearInterval(
                 spawnTimer
             );
 
+
+            /*
+                Remove the enemies.
+
+                IMPORTANT:
+
+                We DO NOT change xpDots here.
+
+                The final score stays visible.
+            */
 
             clearEnemies();
 
@@ -1118,8 +1195,8 @@
 
 
             /*
-                Return logo to animated
-                loading state.
+                Return logo to
+                loading animation.
             */
 
             player.classList.remove(
@@ -1131,6 +1208,14 @@
                 "transform"
             );
 
+
+            /*
+                Keep score visible.
+
+                It will stay on screen
+                until the next game starts.
+            */
+
         }
 
 
@@ -1141,14 +1226,18 @@
         function gameLoop() {
 
             if (!gameRunning) {
+
                 return;
+
             }
 
 
             updateEnemies();
 
 
-            if (checkCollision()) {
+            if (
+                checkCollision()
+            ) {
 
                 endGame();
 
@@ -1167,7 +1256,7 @@
 
 
         /* =====================================================
-           START GAME
+           START NEW GAME
            ===================================================== */
 
         function startGame(
@@ -1180,7 +1269,7 @@
             );
 
 
-            clearTimeout(
+            clearInterval(
                 spawnTimer
             );
 
@@ -1191,8 +1280,28 @@
             updateAreaSize();
 
 
+            /*
+                ==============================================
+                NEW ROUND
+                ==============================================
+
+                THIS is where the score resets.
+
+                It does NOT reset when the player dies.
+            */
+
+            xpDots = 0;
+
+            updateScore();
+
+
             gameRunning = true;
 
+
+            /*
+                Turn loading logo
+                into player.
+            */
 
             player.classList.add(
                 "game-mode"
@@ -1204,8 +1313,8 @@
 
 
             /*
-                Start player at the
-                location that was clicked.
+                Calculate initial player
+                position from click.
             */
 
             const x =
@@ -1259,7 +1368,7 @@
 
 
             /*
-                Spawn first enemy immediately.
+                First enemy immediately.
             */
 
             spawnEnemy();
@@ -1331,8 +1440,11 @@
         ) {
 
             if (
+
                 !gameRunning ||
+
                 !dragging
+
             ) {
 
                 return;
@@ -1406,10 +1518,9 @@
             function(event) {
 
                 /*
-                    Game has not started.
-
-                    Clicking anywhere starts
-                    the game.
+                    ==========================================
+                    GAME NOT RUNNING
+                    ==========================================
                 */
 
                 if (!gameRunning) {
@@ -1427,7 +1538,9 @@
 
 
                     gameArea.setPointerCapture(
+
                         event.pointerId
+
                     );
 
 
@@ -1437,9 +1550,11 @@
 
 
                 /*
-                    Game is running.
+                    ==========================================
+                    GAME RUNNING
+                    ==========================================
 
-                    Only the logo can be grabbed.
+                    Only the player/logo can be grabbed.
                 */
 
                 if (
@@ -1463,7 +1578,9 @@
 
 
                 gameArea.setPointerCapture(
+
                     event.pointerId
+
                 );
 
 
@@ -1491,7 +1608,9 @@
             function(event) {
 
                 if (!dragging) {
+
                     return;
+
                 }
 
 
@@ -1520,21 +1639,29 @@
             try {
 
                 if (
+
                     gameArea.hasPointerCapture(
+
                         event.pointerId
+
                     )
+
                 ) {
 
                     gameArea.releasePointerCapture(
+
                         event.pointerId
+
                     );
 
                 }
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 /*
-                    Ignore pointer-capture errors.
+                    Ignore pointer capture errors.
                 */
 
             }
@@ -1543,14 +1670,20 @@
 
 
         gameArea.addEventListener(
+
             "pointerup",
+
             stopDragging
+
         );
 
 
         gameArea.addEventListener(
+
             "pointercancel",
+
             stopDragging
+
         );
 
 
@@ -1558,8 +1691,7 @@
            UNITY
            =====================================================
 
-           This section intentionally matches
-           your original working Unity setup.
+           Your original working Unity configuration.
            ===================================================== */
 
         createUnityInstance(
@@ -1600,9 +1732,7 @@
             function() {
 
                 /*
-                    Unity is ready.
-
-                    Stop the loading game.
+                    Unity has finished loading.
                 */
 
                 gameRunning = false;
@@ -1615,13 +1745,16 @@
                 );
 
 
-                clearTimeout(
+                clearInterval(
                     spawnTimer
                 );
 
 
+                clearEnemies();
+
+
                 /*
-                    Fade out loading screen.
+                    Fade out the loading screen.
                 */
 
                 loadingOverlay.classList.add(
@@ -1630,7 +1763,8 @@
 
 
                 /*
-                    Remove it completely.
+                    Remove it completely after
+                    the fade finishes.
                 */
 
                 setTimeout(
@@ -1660,14 +1794,19 @@
             function(message) {
 
                 console.error(
+
                     "Unity failed to load:",
+
                     message
+
                 );
 
 
                 alert(
+
                     "Unity failed to load:\n\n" +
                     message
+
                 );
 
             }

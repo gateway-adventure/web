@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        http-equiv="Content-Type"
+        content="text/html; charset=utf-8"
+    >
+
+    <title>Gateway Adventure</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width,
+                 height=device-height,
+                 initial-scale=1.0,
+                 user-scalable=no,
+                 shrink-to-fit=yes"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+           ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+        }
+
+
+        body {
+
+            background: white;
+
+        }
+
+
+        /* =====================================================
+           UNITY CANVAS
+           ===================================================== */
+
+        #unity-canvas {
+
+            width: 100% !important;
+            height: 100% !important;
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            display: block;
+
+        }
+
+
+        /* =====================================================
+           LOADING OVERLAY
+           ===================================================== */
+
+        #loading-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            padding: 12px;
+
+            background: black;
+
+            z-index: 9999;
+
+            opacity: 1;
+
+            transition:
+                opacity 0.4s ease;
+
+        }
+
+
+        /*
+            When Unity is ready,
+            JavaScript adds this class.
+        */
+
+        #loading-overlay.fade-out {
+
+            opacity: 0;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =====================================================
+           INSIDE FRAME
+           ===================================================== */
+
+        #loading-area {
+
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            background: white;
+
+            border-radius: 60px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =====================================================
+           LOADING LOGO
+           ===================================================== */
+
+        #loading-logo {
+
+            position: absolute;
+
+            width: 50%;
+
+            max-width: 500px;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            z-index: 1;
+
+            user-select: none;
+
+            -webkit-user-select: none;
+
+            -webkit-user-drag: none;
+
+            pointer-events: none;
+
+            animation:
+                logoLoaderReveal
+                0.8s
+                infinite
+                linear
+                alternate,
+
+                logoLoaderSpin
+                1.6s
+                infinite
+                linear;
+
+        }
+
+
+        /* =====================================================
+           LOGO IMAGE
+           ===================================================== */
+
+        #loading-logo img {
+
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            /*
+                Your original new loader used
+                invert(1), so this keeps that.
+            */
+
+            filter: invert(1);
+
+            user-select: none;
+
+            -webkit-user-select: none;
+
+            -webkit-user-drag: none;
+
+        }
+
+
+        /* =====================================================
+           LOADER REVEAL
+           ===================================================== */
+
+        @keyframes logoLoaderReveal {
+
+            0% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    0 0,
+
+                    50% 0%,
+
+                    50% 0%,
+
+                    50% 0%,
+
+                    50% 0%,
+
+                    50% 0%
+
+                );
+
+            }
+
+
+            12.5% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    0 0,
+
+                    50% 0%,
+
+                    100% 0%,
+
+                    100% 0%,
+
+                    100% 0%,
+
+                    100% 0%
+
+                );
+
+            }
+
+
+            25% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    0 0,
+
+                    50% 0%,
+
+                    100% 0%,
+
+                    100% 100%,
+
+                    100% 100%,
+
+                    100% 100%
+
+                );
+
+            }
+
+
+            50% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    0 0,
+
+                    50% 0%,
+
+                    100% 0%,
+
+                    100% 100%,
+
+                    50% 100%,
+
+                    0% 100%
+
+                );
+
+            }
+
+
+            62.5% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    100% 0,
+
+                    100% 0%,
+
+                    100% 0%,
+
+                    100% 100%,
+
+                    50% 100%,
+
+                    0% 100%
+
+                );
+
+            }
+
+
+            75% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    100% 100%,
+
+                    100% 100%,
+
+                    100% 100%,
+
+                    100% 100%,
+
+                    50% 100%,
+
+                    0% 100%
+
+                );
+
+            }
+
+
+            100% {
+
+                clip-path: polygon(
+
+                    50% 50%,
+
+                    50% 100%,
+
+                    50% 100%,
+
+                    50% 100%,
+
+                    50% 100%,
+
+                    50% 100%,
+
+                    0% 100%
+
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOADER ROTATION
+           ===================================================== */
+
+        @keyframes logoLoaderSpin {
+
+            0% {
+
+                transform:
+                    translate(-50%, -50%)
+                    scaleY(1)
+                    rotate(0deg);
+
+            }
+
+
+            49.99% {
+
+                transform:
+                    translate(-50%, -50%)
+                    scaleY(1)
+                    rotate(135deg);
+
+            }
+
+
+            50% {
+
+                transform:
+                    translate(-50%, -50%)
+                    scaleY(-1)
+                    rotate(0deg);
+
+            }
+
+
+            100% {
+
+                transform:
+                    translate(-50%, -50%)
+                    scaleY(-1)
+                    rotate(-135deg);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 600px) {
+
+            #loading-overlay {
+
+                padding: 8px;
+
+            }
+
+
+            #loading-area {
+
+                border-radius: 35px;
+
+            }
+
+
+            #loading-logo {
+
+                width: 65%;
+
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         LOADING SCREEN
+         ===================================================== -->
+
+    <div id="loading-overlay">
+
+        <div id="loading-area">
+
+            <div id="loading-logo">
+
+                <img
+                    src="Logo.png"
+                    draggable="false"
+                    alt="Gateway Adventure"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         UNITY CANVAS
+         ===================================================== -->
+
+    <canvas
+        id="unity-canvas"
+        tabindex="-1"
+    ></canvas>
+
+
+    <!-- =====================================================
+         UNITY LOADER
+         
+         THIS IS THE SAME LOADER FROM YOUR ORIGINAL
+         WORKING PAGE.
+         ===================================================== -->
+
+    <script src="Build/31cdebeb6f9458304f376955767127ad.loader.js"></script>
+
+
+    <script>
+
+        /*
+         * ====================================================
+         * UNITY INITIALIZATION
+         * ====================================================
+         *
+         * This is intentionally kept simple.
+         *
+         * Unity loads underneath the loading screen.
+         * When Unity finishes, the loading screen fades away.
+         *
+         */
+
+
+        createUnityInstance(
+
+            document.querySelector(
+                "#unity-canvas"
+            ),
+
+            {
+
+                dataUrl:
+                    "Build/e856865045c29e5902fb36bf4eca1c97.data.unityweb",
+
+                frameworkUrl:
+                    "Build/f82e072c18950d1ae011f1f387fbd233.framework.js.unityweb",
+
+                codeUrl:
+                    "Build/5e7b9f113a604515039f74881bdd1fe4.wasm.unityweb",
+
+                streamingAssetsUrl:
+                    "StreamingAssets",
+
+                companyName:
+                    "Gateway Adventure",
+
+                productName:
+                    "Gateway Adventure",
+
+                productVersion:
+                    "2026090500"
+
+            }
+
+        )
+
+        .then(
+
+            function () {
+
+                /*
+                 * Unity has successfully loaded.
+                 */
+
+                var loadingScreen =
+                    document.getElementById(
+                        "loading-overlay"
+                    );
+
+
+                /*
+                 * Fade out the new loading screen.
+                 */
+
+                loadingScreen.classList.add(
+                    "fade-out"
+                );
+
+
+                /*
+                 * Completely remove it after
+                 * the fade animation.
+                 */
+
+                setTimeout(
+
+                    function () {
+
+                        if (loadingScreen) {
+
+                            loadingScreen.remove();
+
+                        }
+
+                    },
+
+                    450
+
+                );
+
+            }
+
+        )
+
+        .catch(
+
+            function (message) {
+
+                /*
+                 * Keep the error visible in the
+                 * browser console AND show it.
+                 */
+
+                console.error(
+                    "Unity failed to load:",
+                    message
+                );
+
+
+                alert(
+                    "Unity failed to load:\n\n" +
+                    message
+                );
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>

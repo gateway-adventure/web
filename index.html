@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gateway Adventure</title>
+
+<style>
+
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background: white;
+    }
+
+
+    /* =========================
+       FRAME
+    ========================= */
+
+    .frame {
+        position: fixed;
+        inset: 0;
+        padding: 12px;
+        background: black;
+    }
+
+    .inside {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        background: white;
+
+        border-radius: 60px;
+
+        overflow: hidden;
+
+        touch-action: none;
+
+        cursor: default;
+    }
+
+
+    /* =========================
+       LOADING LOGO
+    ========================= */
+
+    .loading-logo {
+
+        position: absolute;
+
+        width: 50%;
+        max-width: 500px;
+
+        left: 50%;
+        top: 50%;
+
+        transform:
+            translate(-50%, -50%);
+
+        z-index: 10;
+
+        user-select: none;
+        -webkit-user-drag: none;
+
+        cursor: grab;
+
+        animation:
+            logoLoaderReveal 0.8s infinite linear alternate,
+            logoLoaderSpin 1.6s infinite linear;
+    }
+
+
+    /* =========================
+       LOADER REVEAL
+    ========================= */
+
+    @keyframes logoLoaderReveal {
+
+        0% {
+            clip-path: polygon(
+                50% 50%,
+                0 0,
+                50% 0%,
+                50% 0%,
+                50% 0%,
+                50% 0%,
+                50% 0%
+            );
+        }
+
+        12.5% {
+            clip-path: polygon(
+                50% 50%,
+                0 0,
+                50% 0%,
+                100% 0%,
+                100% 0%,
+                100% 0%,
+                100% 0%
+            );
+        }
+
+        25% {
+            clip-path: polygon(
+                50% 50%,
+                0 0,
+                50% 0%,
+                100% 0%,
+                100% 100%,
+                100% 100%,
+                100% 100%
+            );
+        }
+
+        50% {
+            clip-path: polygon(
+                50% 50%,
+                0 0,
+                50% 0%,
+                100% 0%,
+                100% 100%,
+                50% 100%,
+                0% 100%
+            );
+        }
+
+        62.5% {
+            clip-path: polygon(
+                50% 50%,
+                100% 0,
+                100% 0%,
+                100% 0%,
+                100% 100%,
+                50% 100%,
+                0% 100%
+            );
+        }
+
+        75% {
+            clip-path: polygon(
+                50% 50%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                50% 100%,
+                0% 100%
+            );
+        }
+
+        100% {
+            clip-path: polygon(
+                50% 50%,
+                50% 100%,
+                50% 100%,
+                50% 100%,
+                50% 100%,
+                50% 100%,
+                0% 100%
+            );
+        }
+    }
+
+
+    /* =========================
+       LOADER ROTATION
+    ========================= */
+
+    @keyframes logoLoaderSpin {
+
+        0% {
+            transform:
+                translate(-50%, -50%)
+                scaleY(1)
+                rotate(0deg);
+        }
+
+        49.99% {
+            transform:
+                translate(-50%, -50%)
+                scaleY(1)
+                rotate(135deg);
+        }
+
+        50% {
+            transform:
+                translate(-50%, -50%)
+                scaleY(-1)
+                rotate(0deg);
+        }
+
+        100% {
+            transform:
+                translate(-50%, -50%)
+                scaleY(-1)
+                rotate(-135deg);
+        }
+    }
+
+
+    /* =========================
+       LOGO IMAGE
+    ========================= */
+
+    .logo-image {
+
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        filter: invert(1);
+
+        user-select: none;
+
+        -webkit-user-drag: none;
+
+        pointer-events: none;
+    }
+
+
+    /* =========================
+       GAME MODE LOGO
+    ========================= */
+
+    .loading-logo.game-mode {
+
+        width: 90px;
+
+        max-width: none;
+
+        left: 0;
+        top: 0;
+
+        animation: none;
+
+        clip-path: none;
+
+        cursor: grab;
+    }
+
+
+    .loading-logo.game-mode:active {
+        cursor: grabbing;
+    }
+
+
+    .loading-logo.game-mode .logo-image {
+        transform: none;
+    }
+
+
+    /* =========================
+       ENEMIES
+    ========================= */
+
+    .enemy {
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 65px;
+        height: 65px;
+
+        border-radius: 50%;
+
+        background: black;
+
+        z-index: 5;
+
+        pointer-events: none;
+    }
+
+
+    /* =========================
+       SCORE
+    ========================= */
+
+    .score {
+
+        position: absolute;
+
+        top: 0;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        min-width: 180px;
+
+        padding: 18px 32px;
+
+        background: black;
+
+        color: white;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 22px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.03em;
+
+        text-align: center;
+
+        white-space: nowrap;
+
+        border-radius:
+            0 0 32px 32px;
+
+        z-index: 20;
+
+        display: none;
+
+        pointer-events: none;
+    }
+
+
+    /* =========================
+       DARK MODE
+    ========================= */
+
+    @media (prefers-color-scheme: dark) {
+
+        body {
+            background: black;
+        }
+
+        .frame {
+            background: white;
+        }
+
+        .inside {
+            background: black;
+        }
+
+        .logo-image {
+            filter: invert(0);
+        }
+
+        .enemy {
+            background: white;
+        }
+
+        .score {
+            background: white;
+            color: black;
+        }
+    }
+
+</style>
+</head>
+
+
+<body>
+
+<div class="frame">
+
+    <div
+        class="inside"
+        id="gameArea"
+    >
+
+        <!-- =====================
+             PLAYER / LOADING LOGO
+        ====================== -->
+
+        <div
+            class="loading-logo"
+            id="player"
+        >
+
+            <img
+                src="Logo.png"
+                class="logo-image"
+                draggable="false"
+                alt="Gateway Adventure"
+            >
+
+        </div>
+
+
+        <!-- =====================
+             SCORE
+        ====================== -->
+
+        <div
+            class="score"
+            id="score"
+        >
+            XP Dots: 0
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DOM
+========================= */
+
+const gameArea =
+    document.getElementById("gameArea");
+
+const playerEl =
+    document.getElementById("player");
+
+const scoreEl =
+    document.getElementById("score");
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const CONFIG = Object.freeze({
+
+    /*
+        Enemy size.
+    */
+    enemySize: 65,
+
+    /*
+        New enemy every second.
+    */
+    enemySpawnIntervalMs: 1000,
+
+    /*
+        Minimum enemy speed.
+    */
+    enemyMinSpeed: 1,
+
+    /*
+        Maximum enemy speed.
+    */
+    enemyMaxSpeed: 3,
+
+    /*
+        Player size during game.
+    */
+    playerGameSize: 90
+
+});
+
+
+/* =========================
+   GAME STATE
+========================= */
+
+const state = {
+
+    running: false,
+
+    dragging: false,
+
+    enemies: [],
+
+    playerX: 0,
+
+    playerY: 0,
+
+    areaWidth:
+        gameArea.clientWidth,
+
+    areaHeight:
+        gameArea.clientHeight,
+
+    spawnTimer: null,
+
+    animationFrame: null,
+
+    dragAreaRect: null
+
+};
+
+
+/* =========================
+   RESIZE OBSERVER
+========================= */
+
+const areaResizeObserver =
+    new ResizeObserver(
+        (entries) => {
+
+            const {
+                width,
+                height
+            } = entries[0].contentRect;
+
+
+            state.areaWidth = width;
+
+            state.areaHeight = height;
+
+
+            if (state.running) {
+
+                keepPlayerInsideArea();
+
+                keepEnemiesInsideArea();
+
+            }
+
+        }
+    );
+
+
+areaResizeObserver.observe(
+    gameArea
+);
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function clamp(
+    value,
+    min,
+    max
+) {
+
+    return Math.min(
+        Math.max(value, min),
+        max
+    );
+
+}
+
+
+function maxPositionFor(
+    elementSize,
+    areaSize
+) {
+
+    return Math.max(
+        0,
+        areaSize - elementSize
+    );
+
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+function updateScoreDisplay() {
+
+    scoreEl.textContent =
+        `XP Dots: ${state.enemies.length}`;
+
+}
+
+
+/* =========================
+   PLAYER POSITION
+========================= */
+
+function setPlayerPosition(
+    x,
+    y
+) {
+
+    state.playerX = x;
+
+    state.playerY = y;
+
+
+    playerEl.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+}
+
+
+/* =========================
+   ENTER GAME MODE
+========================= */
+
+function enterGameMode() {
+
+    /*
+        Stop loading animation.
+    */
+
+    playerEl.classList.add(
+        "game-mode"
+    );
+
+
+    /*
+        Temporarily center the player.
+        The starting pointer position will
+        immediately replace this position.
+    */
+
+    const centeredX =
+        maxPositionFor(
+            CONFIG.playerGameSize,
+            state.areaWidth
+        ) / 2;
+
+
+    const centeredY =
+        maxPositionFor(
+            CONFIG.playerGameSize,
+            state.areaHeight
+        ) / 2;
+
+
+    setPlayerPosition(
+        centeredX,
+        centeredY
+    );
+
+}
+
+
+/* =========================
+   EXIT GAME MODE
+========================= */
+
+function exitGameMode() {
+
+    playerEl.classList.remove(
+        "game-mode"
+    );
+
+
+    /*
+        Return to CSS centered
+        loading position.
+    */
+
+    playerEl.style.removeProperty(
+        "transform"
+    );
+
+}
+
+
+/* =========================
+   PLAYER HIT TEST
+========================= */
+
+function isPointerOnPlayer(
+    clientX,
+    clientY
+) {
+
+    const rect =
+        playerEl.getBoundingClientRect();
+
+
+    return (
+
+        clientX >= rect.left &&
+
+        clientX <= rect.right &&
+
+        clientY >= rect.top &&
+
+        clientY <= rect.bottom
+
+    );
+
+}
+
+
+/* =========================
+   MOVE PLAYER
+========================= */
+
+function movePlayerTo(
+    clientX,
+    clientY,
+    areaRect
+) {
+
+    if (
+        !state.running ||
+        !state.dragging
+    ) {
+
+        return;
+
+    }
+
+
+    const halfSize =
+        CONFIG.playerGameSize / 2;
+
+
+    const x =
+        clamp(
+
+            clientX -
+            areaRect.left -
+            halfSize,
+
+            0,
+
+            maxPositionFor(
+                CONFIG.playerGameSize,
+                areaRect.width
+            )
+
+        );
+
+
+    const y =
+        clamp(
+
+            clientY -
+            areaRect.top -
+            halfSize,
+
+            0,
+
+            maxPositionFor(
+                CONFIG.playerGameSize,
+                areaRect.height
+            )
+
+        );
+
+
+    setPlayerPosition(
+        x,
+        y
+    );
+
+}
+
+
+/* =========================
+   KEEP PLAYER INSIDE
+========================= */
+
+function keepPlayerInsideArea() {
+
+    const x =
+        clamp(
+
+            state.playerX,
+
+            0,
+
+            maxPositionFor(
+                CONFIG.playerGameSize,
+                state.areaWidth
+            )
+
+        );
+
+
+    const y =
+        clamp(
+
+            state.playerY,
+
+            0,
+
+            maxPositionFor(
+                CONFIG.playerGameSize,
+                state.areaHeight
+            )
+
+        );
+
+
+    setPlayerPosition(
+        x,
+        y
+    );
+
+}
+
+
+/* =========================
+   ENEMY SPEED
+========================= */
+
+function randomSignedSpeed() {
+
+    const direction =
+        Math.random() > 0.5
+            ? 1
+            : -1;
+
+
+    const magnitude =
+        CONFIG.enemyMinSpeed +
+        Math.random() *
+        (
+            CONFIG.enemyMaxSpeed -
+            CONFIG.enemyMinSpeed
+        );
+
+
+    return direction *
+           magnitude;
+
+}
+
+
+/* =========================
+   ENEMY SPAWN LOCATION
+========================= */
+
+function getSpawnPoint() {
+
+    const areaRect =
+        gameArea.getBoundingClientRect();
+
+
+    const scoreRect =
+        scoreEl.getBoundingClientRect();
+
+
+    const centerX =
+        scoreRect.left +
+        scoreRect.width / 2 -
+        areaRect.left;
+
+
+    const centerY =
+        scoreRect.top +
+        scoreRect.height / 2 -
+        areaRect.top;
+
+
+    return {
+
+        x: clamp(
+
+            centerX -
+            CONFIG.enemySize / 2,
+
+            0,
+
+            maxPositionFor(
+                CONFIG.enemySize,
+                state.areaWidth
+            )
+
+        ),
+
+
+        y: clamp(
+
+            centerY -
+            CONFIG.enemySize / 2,
+
+            0,
+
+            maxPositionFor(
+                CONFIG.enemySize,
+                state.areaHeight
+            )
+
+        )
+
+    };
+
+}
+
+
+/* =========================
+   CREATE ENEMY
+========================= */
+
+function createEnemy() {
+
+    const el =
+        document.createElement(
+            "div"
+        );
+
+
+    el.className =
+        "enemy";
+
+
+    const spawnPoint =
+        getSpawnPoint();
+
+
+    const enemy = {
+
+        el,
+
+        x: spawnPoint.x,
+
+        y: spawnPoint.y,
+
+        vx: randomSignedSpeed(),
+
+        vy: randomSignedSpeed()
+
+    };
+
+
+    el.style.transform =
+        `translate(
+            ${enemy.x}px,
+            ${enemy.y}px
+        )`;
+
+
+    gameArea.appendChild(
+        el
+    );
+
+
+    state.enemies.push(
+        enemy
+    );
+
+
+    updateScoreDisplay();
+
+}
+
+
+/* =========================
+   CLEAR ENEMIES
+========================= */
+
+function clearEnemies() {
+
+    for (
+        const enemy of state.enemies
+    ) {
+
+        enemy.el.remove();
+
+    }
+
+
+    state.enemies = [];
+
+}
+
+
+/* =========================
+   UPDATE ENEMY
+========================= */
+
+function updateEnemyPosition(
+    enemy
+) {
+
+    enemy.x += enemy.vx;
+
+    enemy.y += enemy.vy;
+
+
+    const maxX =
+        maxPositionFor(
+            CONFIG.enemySize,
+            state.areaWidth
+        );
+
+
+    const maxY =
+        maxPositionFor(
+            CONFIG.enemySize,
+            state.areaHeight
+        );
+
+
+    /*
+        Horizontal bounce.
+    */
+
+    if (
+        enemy.x <= 0 ||
+        enemy.x >= maxX
+    ) {
+
+        enemy.x =
+            clamp(
+                enemy.x,
+                0,
+                maxX
+            );
+
+
+        enemy.vx *= -1;
+
+    }
+
+
+    /*
+        Vertical bounce.
+    */
+
+    if (
+        enemy.y <= 0 ||
+        enemy.y >= maxY
+    ) {
+
+        enemy.y =
+            clamp(
+                enemy.y,
+                0,
+                maxY
+            );
+
+
+        enemy.vy *= -1;
+
+    }
+
+
+    enemy.el.style.transform =
+        `translate(
+            ${enemy.x}px,
+            ${enemy.y}px
+        )`;
+
+}
+
+
+/* =========================
+   KEEP ENEMIES INSIDE
+========================= */
+
+function keepEnemiesInsideArea() {
+
+    const maxX =
+        maxPositionFor(
+            CONFIG.enemySize,
+            state.areaWidth
+        );
+
+
+    const maxY =
+        maxPositionFor(
+            CONFIG.enemySize,
+            state.areaHeight
+        );
+
+
+    for (
+        const enemy of state.enemies
+    ) {
+
+        enemy.x =
+            clamp(
+                enemy.x,
+                0,
+                maxX
+            );
+
+
+        enemy.y =
+            clamp(
+                enemy.y,
+                0,
+                maxY
+            );
+
+
+        enemy.el.style.transform =
+            `translate(
+                ${enemy.x}px,
+                ${enemy.y}px
+            )`;
+
+    }
+
+}
+
+
+/* =========================
+   SPAWN TIMER
+========================= */
+
+function scheduleNextEnemy() {
+
+    state.spawnTimer =
+        setTimeout(
+            () => {
+
+                if (!state.running) {
+                    return;
+                }
+
+
+                createEnemy();
+
+                scheduleNextEnemy();
+
+            },
+
+            CONFIG.enemySpawnIntervalMs
+        );
+
+}
+
+
+/* =========================
+   COLLISION
+========================= */
+
+function isPlayerCollidingWithAnyEnemy() {
+
+    const playerCenterX =
+        state.playerX +
+        CONFIG.playerGameSize / 2;
+
+
+    const playerCenterY =
+        state.playerY +
+        CONFIG.playerGameSize / 2;
+
+
+    const collisionDistance =
+        CONFIG.playerGameSize / 2 +
+        CONFIG.enemySize / 2;
+
+
+    return state.enemies.some(
+        (enemy) => {
+
+            const enemyCenterX =
+                enemy.x +
+                CONFIG.enemySize / 2;
+
+
+            const enemyCenterY =
+                enemy.y +
+                CONFIG.enemySize / 2;
+
+
+            const dx =
+                playerCenterX -
+                enemyCenterX;
+
+
+            const dy =
+                playerCenterY -
+                enemyCenterY;
+
+
+            return (
+                Math.hypot(dx, dy) <
+                collisionDistance
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   START GAME
+========================= */
+
+function startGame(
+    initialClientX,
+    initialClientY
+) {
+
+    cancelAnimationFrame(
+        state.animationFrame
+    );
+
+
+    clearTimeout(
+        state.spawnTimer
+    );
+
+
+    clearEnemies();
+
+
+    state.running = true;
+
+    state.dragging = false;
+
+
+    scoreEl.style.display =
+        "block";
+
+
+    /*
+        Convert the loading logo
+        into the player.
+    */
+
+    enterGameMode();
+
+
+    /*
+        Get the game area's current
+        position and size.
+    */
+
+    const areaRect =
+        gameArea.getBoundingClientRect();
+
+
+    state.dragAreaRect =
+        areaRect;
+
+
+    /*
+        Immediately move the player
+        to the original click position.
+    */
+
+    if (
+        initialClientX !== undefined &&
+        initialClientY !== undefined
+    ) {
+
+        /*
+            Temporarily enable dragging
+            so movePlayerTo() can position
+            the logo.
+        */
+
+        state.dragging = true;
+
+
+        movePlayerTo(
+            initialClientX,
+            initialClientY,
+            areaRect
+        );
+
+    }
+
+
+    /*
+        First enemy immediately.
+    */
+
+    createEnemy();
+
+
+    /*
+        Continue spawning enemies.
+    */
+
+    scheduleNextEnemy();
+
+
+    /*
+        Start game loop.
+    */
+
+    state.animationFrame =
+        requestAnimationFrame(
+            gameLoop
+        );
+
+}
+
+
+/* =========================
+   GAME LOOP
+========================= */
+
+function gameLoop() {
+
+    if (!state.running) {
+        return;
+    }
+
+
+    for (
+        const enemy of state.enemies
+    ) {
+
+        updateEnemyPosition(
+            enemy
+        );
+
+    }
+
+
+    /*
+        Check collision.
+    */
+
+    if (
+        isPlayerCollidingWithAnyEnemy()
+    ) {
+
+        endGame();
+
+        return;
+
+    }
+
+
+    state.animationFrame =
+        requestAnimationFrame(
+            gameLoop
+        );
+
+}
+
+
+/* =========================
+   END GAME
+========================= */
+
+function endGame() {
+
+    state.running = false;
+
+    state.dragging = false;
+
+
+    cancelAnimationFrame(
+        state.animationFrame
+    );
+
+
+    clearTimeout(
+        state.spawnTimer
+    );
+
+
+    /*
+        Keep final score visible.
+    */
+
+    updateScoreDisplay();
+
+
+    /*
+        Remove enemies.
+    */
+
+    clearEnemies();
+
+
+    scoreEl.style.display =
+        "block";
+
+
+    /*
+        Return logo to loading
+        animation.
+    */
+
+    exitGameMode();
+
+}
+
+
+/* =========================
+   POINTER DOWN
+========================= */
+
+gameArea.addEventListener(
+    "pointerdown",
+    (event) => {
+
+        /*
+            =========================
+            BEFORE GAME START
+            =========================
+
+            Clicking anywhere starts
+            the game.
+
+            The logo immediately moves
+            to the exact location clicked.
+        */
+
+        if (!state.running) {
+
+            startGame(
+                event.clientX,
+                event.clientY
+            );
+
+
+            /*
+                Continue holding the pointer
+                so the player can immediately
+                drag from the starting location.
+            */
+
+            state.dragging = true;
+
+
+            state.dragAreaRect =
+                gameArea.getBoundingClientRect();
+
+
+            gameArea.setPointerCapture(
+                event.pointerId
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+            =========================
+            GAME ALREADY RUNNING
+            =========================
+
+            Only the logo itself can
+            start a new drag.
+
+            Clicking anywhere else does
+            absolutely nothing.
+        */
+
+        if (
+            !isPointerOnPlayer(
+                event.clientX,
+                event.clientY
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+            Begin dragging the logo.
+        */
+
+        state.dragging = true;
+
+
+        state.dragAreaRect =
+            gameArea.getBoundingClientRect();
+
+
+        gameArea.setPointerCapture(
+            event.pointerId
+        );
+
+
+        movePlayerTo(
+            event.clientX,
+            event.clientY,
+            state.dragAreaRect
+        );
+
+    }
+);
+
+
+/* =========================
+   POINTER MOVE
+========================= */
+
+gameArea.addEventListener(
+    "pointermove",
+    (event) => {
+
+        if (!state.dragging) {
+            return;
+        }
+
+
+        movePlayerTo(
+            event.clientX,
+            event.clientY,
+            state.dragAreaRect
+        );
+
+    }
+);
+
+
+/* =========================
+   STOP DRAGGING
+========================= */
+
+function stopDragging(
+    event
+) {
+
+    state.dragging = false;
+
+
+    /*
+        Release pointer capture when
+        possible.
+    */
+
+    if (
+        gameArea.hasPointerCapture &&
+        gameArea.hasPointerCapture(
+            event.pointerId
+        )
+    ) {
+
+        gameArea.releasePointerCapture(
+            event.pointerId
+        );
+
+    }
+
+}
+
+
+gameArea.addEventListener(
+    "pointerup",
+    stopDragging
+);
+
+
+gameArea.addEventListener(
+    "pointercancel",
+    stopDragging
+);
+
+</script>
+
+</body>
+</html>

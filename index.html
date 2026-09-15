@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
 
     <meta charset="UTF-8">
-
-    <meta
-        http-equiv="Content-Type"
-        content="text/html; charset=utf-8"
-    >
 
     <meta
         name="viewport"
@@ -23,25 +19,23 @@
 
     <!-- =====================================================
          FAVICON
-         Uses your 1800 × 1800 Logo.png
          ===================================================== -->
 
     <link
         rel="icon"
         type="image/png"
-        sizes="1800x1800"
-        href="./Logo.png?v=3"
+        href="Logo.png?v=3"
     >
 
     <link
         rel="shortcut icon"
         type="image/png"
-        href="./Logo.png?v=3"
+        href="Logo.png?v=3"
     >
 
     <link
         rel="apple-touch-icon"
-        href="./Logo.png?v=3"
+        href="Logo.png?v=3"
     >
 
 
@@ -100,6 +94,8 @@
             height: 100% !important;
 
             display: block;
+
+            background: white;
 
         }
 
@@ -489,7 +485,7 @@
 
 
         /* =========================
-           DARK THEME
+           DARK MODE
            ========================= */
 
         @media (prefers-color-scheme: dark) {
@@ -532,6 +528,12 @@
 
             }
 
+            #unity-canvas {
+
+                background: black;
+
+            }
+
         }
 
 
@@ -570,6 +572,16 @@
 
 
     <!-- =====================================================
+         UNITY CANVAS
+         ===================================================== -->
+
+    <canvas
+        id="unity-canvas"
+        tabindex="-1"
+    ></canvas>
+
+
+    <!-- =====================================================
          LOADING GAME
          ===================================================== -->
 
@@ -597,33 +609,24 @@
                 XP Dots: 0
             </div>
 
-
         </div>
 
     </div>
 
 
     <!-- =====================================================
-         UNITY CANVAS
-         ===================================================== -->
-
-    <canvas
-        id="unity-canvas"
-        tabindex="-1"
-    ></canvas>
-
-
-    <!-- =====================================================
          UNITY LOADER
+         
+         IMPORTANT:
+         Unity automatically replaces
+         {{{ LOADER_FILENAME }}}
+         with the correct loader filename.
          ===================================================== -->
 
-    <script
-        src="Build/31cdebeb6f9458304f376955767127ad.loader.js"
-    ></script>
+    <script src="Build/{{{ LOADER_FILENAME }}}"></script>
 
 
     <script>
-
 
         /* =====================================================
            DOM
@@ -681,19 +684,6 @@
         let dragging = false;
 
         let enemies = [];
-
-        /*
-            IMPORTANT:
-
-            This is the actual score.
-
-            It does NOT equal enemies.length.
-
-            enemies.length = enemies currently alive.
-
-            xpDots = total dots collected/spawned
-            during the current round.
-        */
 
         let xpDots = 0;
 
@@ -768,11 +758,7 @@
 
 
             player.style.transform =
-
-                `translate(
-                    ${x}px,
-                    ${y}px
-                )`;
+                `translate(${x}px, ${y}px)`;
 
         }
 
@@ -788,7 +774,6 @@
                 CONFIG.minSpeed +
 
                 Math.random() *
-
                 (
                     CONFIG.maxSpeed -
                     CONFIG.minSpeed
@@ -796,9 +781,7 @@
 
 
             return Math.random() > 0.5
-
                 ? speed
-
                 : -speed;
 
         }
@@ -842,29 +825,23 @@
             const maxX =
 
                 Math.max(
-
                     0,
-
                     areaRect.width -
                     CONFIG.enemySize
-
                 );
 
 
             const maxY =
 
                 Math.max(
-
                     0,
-
                     areaRect.height -
                     CONFIG.enemySize
-
                 );
 
 
             /*
-                Spawn near the top-center.
+                Spawn near top center.
             */
 
             const x =
@@ -884,42 +861,29 @@
             const y =
 
                 clamp(
-
                     60,
-
                     0,
-
                     maxY
-
                 );
 
 
             const enemy = {
 
-                element:
-                    enemyElement,
+                element: enemyElement,
 
-                x:
-                    x,
+                x: x,
 
-                y:
-                    y,
+                y: y,
 
-                vx:
-                    randomSpeed(),
+                vx: randomSpeed(),
 
-                vy:
-                    randomSpeed()
+                vy: randomSpeed()
 
             };
 
 
             enemyElement.style.transform =
-
-                `translate(
-                    ${enemy.x}px,
-                    ${enemy.y}px
-                )`;
+                `translate(${enemy.x}px, ${enemy.y}px)`;
 
 
             gameArea.appendChild(
@@ -932,15 +896,7 @@
             );
 
 
-            /*
-                ADD ONE XP DOT.
-
-                This is separate from
-                the enemies array.
-            */
-
             xpDots++;
-
 
             updateScore();
 
@@ -956,24 +912,18 @@
             const maxX =
 
                 Math.max(
-
                     0,
-
                     areaRect.width -
                     CONFIG.enemySize
-
                 );
 
 
             const maxY =
 
                 Math.max(
-
                     0,
-
                     areaRect.height -
                     CONFIG.enemySize
-
                 );
 
 
@@ -981,17 +931,10 @@
                 const enemy of enemies
             ) {
 
-                enemy.x +=
-                    enemy.vx;
+                enemy.x += enemy.vx;
 
+                enemy.y += enemy.vy;
 
-                enemy.y +=
-                    enemy.vy;
-
-
-                /*
-                    Bounce horizontally.
-                */
 
                 if (
 
@@ -1002,26 +945,16 @@
                 ) {
 
                     enemy.x =
-
                         clamp(
-
                             enemy.x,
-
                             0,
-
                             maxX
-
                         );
-
 
                     enemy.vx *= -1;
 
                 }
 
-
-                /*
-                    Bounce vertically.
-                */
 
                 if (
 
@@ -1032,17 +965,11 @@
                 ) {
 
                     enemy.y =
-
                         clamp(
-
                             enemy.y,
-
                             0,
-
                             maxY
-
                         );
-
 
                     enemy.vy *= -1;
 
@@ -1050,11 +977,7 @@
 
 
                 enemy.element.style.transform =
-
-                    `translate(
-                        ${enemy.x}px,
-                        ${enemy.y}px
-                    )`;
+                    `translate(${enemy.x}px, ${enemy.y}px)`;
 
             }
 
@@ -1082,7 +1005,6 @@
             const collisionDistance =
 
                 CONFIG.playerSize / 2 +
-
                 CONFIG.enemySize / 2;
 
 
@@ -1119,9 +1041,7 @@
                     Math.hypot(
                         dx,
                         dy
-                    ) <
-
-                    collisionDistance
+                    ) < collisionDistance
 
                 ) {
 
@@ -1178,25 +1098,18 @@
             );
 
 
-            /*
-                Remove the enemies.
-
-                IMPORTANT:
-
-                We DO NOT change xpDots here.
-
-                The final score stays visible.
-            */
-
             clearEnemies();
 
+
+            /*
+                Keep the final XP score.
+            */
 
             updateScore();
 
 
             /*
-                Return logo to
-                loading animation.
+                Return logo to loading animation.
             */
 
             player.classList.remove(
@@ -1207,14 +1120,6 @@
             player.style.removeProperty(
                 "transform"
             );
-
-
-            /*
-                Keep score visible.
-
-                It will stay on screen
-                until the next game starts.
-            */
 
         }
 
@@ -1235,9 +1140,7 @@
             updateEnemies();
 
 
-            if (
-                checkCollision()
-            ) {
+            if (checkCollision()) {
 
                 endGame();
 
@@ -1247,7 +1150,6 @@
 
 
             animationFrame =
-
                 requestAnimationFrame(
                     gameLoop
                 );
@@ -1281,13 +1183,7 @@
 
 
             /*
-                ==============================================
-                NEW ROUND
-                ==============================================
-
-                THIS is where the score resets.
-
-                It does NOT reset when the player dies.
+                Reset score for NEW ROUND.
             */
 
             xpDots = 0;
@@ -1299,8 +1195,7 @@
 
 
             /*
-                Turn loading logo
-                into player.
+                Turn logo into player.
             */
 
             player.classList.add(
@@ -1311,11 +1206,6 @@
             score.style.display =
                 "block";
 
-
-            /*
-                Calculate initial player
-                position from click.
-            */
 
             const x =
 
@@ -1328,12 +1218,9 @@
                     0,
 
                     Math.max(
-
                         0,
-
                         areaRect.width -
                         CONFIG.playerSize
-
                     )
 
                 );
@@ -1350,12 +1237,9 @@
                     0,
 
                     Math.max(
-
                         0,
-
                         areaRect.height -
                         CONFIG.playerSize
-
                     )
 
                 );
@@ -1381,11 +1265,8 @@
             spawnTimer =
 
                 setInterval(
-
                     spawnEnemy,
-
                     CONFIG.enemySpawnInterval
-
                 );
 
 
@@ -1394,7 +1275,6 @@
             */
 
             animationFrame =
-
                 requestAnimationFrame(
                     gameLoop
                 );
@@ -1466,12 +1346,9 @@
                     0,
 
                     Math.max(
-
                         0,
-
                         areaRect.width -
                         CONFIG.playerSize
-
                     )
 
                 );
@@ -1488,12 +1365,9 @@
                     0,
 
                     Math.max(
-
                         0,
-
                         areaRect.height -
                         CONFIG.playerSize
-
                     )
 
                 );
@@ -1518,19 +1392,15 @@
             function(event) {
 
                 /*
-                    ==========================================
-                    GAME NOT RUNNING
-                    ==========================================
+                    Start a new game when the
+                    game is not running.
                 */
 
                 if (!gameRunning) {
 
                     startGame(
-
                         event.clientX,
-
                         event.clientY
-
                     );
 
 
@@ -1538,9 +1408,7 @@
 
 
                     gameArea.setPointerCapture(
-
                         event.pointerId
-
                     );
 
 
@@ -1550,21 +1418,15 @@
 
 
                 /*
-                    ==========================================
-                    GAME RUNNING
-                    ==========================================
-
-                    Only the player/logo can be grabbed.
+                    Only grab the player
+                    while game is running.
                 */
 
                 if (
 
                     !playerContainsPoint(
-
                         event.clientX,
-
                         event.clientY
-
                     )
 
                 ) {
@@ -1578,18 +1440,13 @@
 
 
                 gameArea.setPointerCapture(
-
                     event.pointerId
-
                 );
 
 
                 movePlayer(
-
                     event.clientX,
-
                     event.clientY
-
                 );
 
             }
@@ -1615,11 +1472,8 @@
 
 
                 movePlayer(
-
                     event.clientX,
-
                     event.clientY
-
                 );
 
             }
@@ -1641,17 +1495,13 @@
                 if (
 
                     gameArea.hasPointerCapture(
-
                         event.pointerId
-
                     )
 
                 ) {
 
                     gameArea.releasePointerCapture(
-
                         event.pointerId
-
                     );
 
                 }
@@ -1670,20 +1520,14 @@
 
 
         gameArea.addEventListener(
-
             "pointerup",
-
             stopDragging
-
         );
 
 
         gameArea.addEventListener(
-
             "pointercancel",
-
             stopDragging
-
         );
 
 
@@ -1691,7 +1535,14 @@
            UNITY
            =====================================================
 
-           Your original working Unity configuration.
+           IMPORTANT:
+
+           These variables are automatically replaced
+           by Unity when this file is used as a
+           WebGL template.
+
+           You no longer need to manually change
+           the hashed filenames after every build.
            ===================================================== */
 
         createUnityInstance(
@@ -1703,13 +1554,13 @@
             {
 
                 dataUrl:
-                    "Build/e856865045c29e5902fb36bf4eca1c97.data.unityweb",
+                    "Build/{{{ DATA_FILENAME }}}",
 
                 frameworkUrl:
-                    "Build/f82e072c18950d1ae011f1f387fbd233.framework.js.unityweb",
+                    "Build/{{{ FRAMEWORK_FILENAME }}}",
 
                 codeUrl:
-                    "Build/5e7b9f113a604515039f74881bdd1fe4.wasm.unityweb",
+                    "Build/{{{ CODE_FILENAME }}}",
 
                 streamingAssetsUrl:
                     "StreamingAssets",
@@ -1732,7 +1583,7 @@
             function() {
 
                 /*
-                    Unity has finished loading.
+                    Unity finished loading.
                 */
 
                 gameRunning = false;
@@ -1754,7 +1605,7 @@
 
 
                 /*
-                    Fade out the loading screen.
+                    Fade loading screen out.
                 */
 
                 loadingOverlay.classList.add(
@@ -1763,8 +1614,8 @@
 
 
                 /*
-                    Remove it completely after
-                    the fade finishes.
+                    Remove loading screen
+                    after animation.
                 */
 
                 setTimeout(
@@ -1794,28 +1645,21 @@
             function(message) {
 
                 console.error(
-
                     "Unity failed to load:",
-
                     message
-
                 );
 
 
                 alert(
-
                     "Unity failed to load:\n\n" +
                     message
-
                 );
 
             }
 
         );
 
-
     </script>
-
 
 </body>
 

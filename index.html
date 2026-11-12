@@ -122,9 +122,9 @@
 
             top: 0;
 
-            width: 100% *!important*;
+            width: 100% !important;
 
-            height: 100% *!important*;
+            height: 100% !important;
 
             display: block;
 
@@ -1954,7 +1954,13 @@
 
                 productVersion:
 
-                    "2026090500"
+                    "2026090500",
+
+                // Keep Unity's drawing buffer matched to the full-screen canvas.
+                matchWebGLToCanvasSize: true,
+
+                // Avoid excessive backing-buffer scaling on high-DPI displays.
+                devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
 
             }
 

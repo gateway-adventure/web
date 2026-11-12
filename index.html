@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en-us">
 
 <head>
@@ -6,81 +7,111 @@
     <meta charset="UTF-8">
 
     <meta
+
         name="viewport"
+
         content="width=device-width,
+
                  height=device-height,
+
                  initial-scale=1.0,
+
                  user-scalable=no,
+
                  shrink-to-fit=yes"
+
     >
 
     <title>Gateway Adventure</title>
 
-
     <!-- =====================================================
+
          FAVICON
+
          ===================================================== -->
 
     <link
+
         rel="icon"
+
         type="image/png"
+
         href="Logo.png?v=3"
+
     >
 
     <link
+
         rel="shortcut icon"
+
         type="image/png"
+
         href="Logo.png?v=3"
+
     >
 
     <link
-        rel="apple-touch-icon"
-        href="Logo.png?v=3"
-    >
 
+        rel="apple-touch-icon"
+
+        href="Logo.png?v=3"
+
+    >
 
     <!-- =====================================================
+
          STYLES
+
          ===================================================== -->
 
     <style>
 
         /* =========================
+
            RESET
+
            ========================= */
 
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
         }
 
-
         html,
+
         body {
 
             width: 100%;
+
             height: 100%;
 
             overflow: hidden;
 
         }
 
-
         body {
 
             background: white;
 
             font-family:
+
                 Arial,
+
                 Helvetica,
+
                 sans-serif;
 
         }
 
-
         /* =========================
+
            UNITY CANVAS
+
            ========================= */
 
         #unity-canvas {
@@ -88,9 +119,11 @@
             position: absolute;
 
             left: 0;
+
             top: 0;
 
             width: 100% !important;
+
             height: 100% !important;
 
             display: block;
@@ -99,9 +132,10 @@
 
         }
 
-
         /* =========================
+
            LOADING OVERLAY
+
            ========================= */
 
         #loading-overlay {
@@ -111,6 +145,7 @@
             inset: 0;
 
             width: 100%;
+
             height: 100%;
 
             padding: 12px;
@@ -122,10 +157,10 @@
             opacity: 1;
 
             transition:
+
                 opacity 0.4s ease;
 
         }
-
 
         #loading-overlay.fade-out {
 
@@ -135,9 +170,10 @@
 
         }
 
-
         /* =========================
+
            GAME AREA
+
            ========================= */
 
         #gameArea {
@@ -145,6 +181,7 @@
             position: relative;
 
             width: 100%;
+
             height: 100%;
 
             background: white;
@@ -159,9 +196,10 @@
 
         }
 
-
         /* =========================
+
            LOADING LOGO
+
            ========================= */
 
         #player {
@@ -173,9 +211,11 @@
             max-width: 500px;
 
             left: 50%;
+
             top: 50%;
 
             transform:
+
                 translate(-50%, -50%);
 
             z-index: 10;
@@ -189,19 +229,26 @@
             cursor: grab;
 
             animation:
+
                 logoLoaderReveal
+
                 0.8s
+
                 infinite
+
                 linear
+
                 alternate,
 
                 logoLoaderSpin
+
                 1.6s
+
                 infinite
+
                 linear;
 
         }
-
 
         #player:active {
 
@@ -209,9 +256,10 @@
 
         }
 
-
         /* =========================
+
            LOGO IMAGE
+
            ========================= */
 
         #player img {
@@ -219,6 +267,7 @@
             display: block;
 
             width: 100%;
+
             height: auto;
 
             filter: invert(1);
@@ -233,23 +282,71 @@
 
         }
 
-
         /* =========================
+
            LOADING REVEAL
+
            ========================= */
 
-        @keyframes logoLoaderReveal {
+                /* =========================
+          LEGAL LINKS
+          ========================= */
+
+        #legal-links {
+            position: absolute;
+            left: 50%;
+            top: calc(50% + min(25vw, 250px) + 24px);
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            z-index: 30;
+            white-space: nowrap;
+        }
+
+        #legal-links a {
+            display: inline-block;
+            padding: 10px 16px;
+            border: 1px solid white;
+            border-radius: 999px;
+            color: white;
+            background: rgba(0, 0, 0, 0.65);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        #legal-links a:hover {
+            color: black;
+            background: white;
+        }
+
+        #legal-links.hidden {
+            display: none;
+        }
+
+@keyframes logoLoaderReveal {
 
             0% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     0 0,
+
                     50% 0%,
+
                     50% 0%,
+
                     50% 0%,
+
                     50% 0%,
+
                     50% 0%
+
                 );
 
             }
@@ -257,13 +354,21 @@
             12.5% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     0 0,
+
                     50% 0%,
+
                     100% 0%,
+
                     100% 0%,
+
                     100% 0%,
+
                     100% 0%
+
                 );
 
             }
@@ -271,13 +376,21 @@
             25% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     0 0,
+
                     50% 0%,
+
                     100% 0%,
+
                     100% 100%,
+
                     100% 100%,
+
                     100% 100%
+
                 );
 
             }
@@ -285,13 +398,21 @@
             50% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     0 0,
+
                     50% 0%,
+
                     100% 0%,
+
                     100% 100%,
+
                     50% 100%,
+
                     0% 100%
+
                 );
 
             }
@@ -299,13 +420,21 @@
             62.5% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     100% 0,
+
                     100% 0%,
+
                     100% 0%,
+
                     100% 100%,
+
                     50% 100%,
+
                     0% 100%
+
                 );
 
             }
@@ -313,13 +442,21 @@
             75% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     100% 100%,
+
                     100% 100%,
+
                     100% 100%,
+
                     100% 100%,
+
                     50% 100%,
+
                     0% 100%
+
                 );
 
             }
@@ -327,22 +464,31 @@
             100% {
 
                 clip-path: polygon(
+
                     50% 50%,
+
                     50% 100%,
+
                     50% 100%,
+
                     50% 100%,
+
                     50% 100%,
+
                     50% 100%,
+
                     0% 100%
+
                 );
 
             }
 
         }
 
-
         /* =========================
+
            LOADING ROTATION
+
            ========================= */
 
         @keyframes logoLoaderSpin {
@@ -350,8 +496,11 @@
             0% {
 
                 transform:
+
                     translate(-50%, -50%)
+
                     scaleY(1)
+
                     rotate(0deg);
 
             }
@@ -359,8 +508,11 @@
             49.99% {
 
                 transform:
+
                     translate(-50%, -50%)
+
                     scaleY(1)
+
                     rotate(135deg);
 
             }
@@ -368,8 +520,11 @@
             50% {
 
                 transform:
+
                     translate(-50%, -50%)
+
                     scaleY(-1)
+
                     rotate(0deg);
 
             }
@@ -377,17 +532,21 @@
             100% {
 
                 transform:
+
                     translate(-50%, -50%)
+
                     scaleY(-1)
+
                     rotate(-135deg);
 
             }
 
         }
 
-
         /* =========================
+
            GAME MODE PLAYER
+
            ========================= */
 
         #player.game-mode {
@@ -397,6 +556,7 @@
             max-width: none;
 
             left: 0;
+
             top: 0;
 
             animation: none;
@@ -407,16 +567,16 @@
 
         }
 
-
         #player.game-mode:active {
 
             cursor: grabbing;
 
         }
 
-
         /* =========================
+
            ENEMIES
+
            ========================= */
 
         .enemy {
@@ -424,9 +584,11 @@
             position: absolute;
 
             left: 0;
+
             top: 0;
 
             width: 65px;
+
             height: 65px;
 
             border-radius: 50%;
@@ -439,9 +601,10 @@
 
         }
 
-
         /* =========================
+
            SCORE
+
            ========================= */
 
         #score {
@@ -449,9 +612,11 @@
             position: absolute;
 
             top: 0;
+
             left: 50%;
 
             transform:
+
                 translateX(-50%);
 
             min-width: 180px;
@@ -473,6 +638,7 @@
             white-space: nowrap;
 
             border-radius:
+
                 0 0 32px 32px;
 
             z-index: 20;
@@ -483,9 +649,10 @@
 
         }
 
-
         /* =========================
+
            DARK MODE
+
            ========================= */
 
         @media (prefers-color-scheme: dark) {
@@ -536,12 +703,23 @@
 
         }
 
-
         /* =========================
+
            SMALL SCREENS
+
            ========================= */
 
         @media (max-width: 600px) {
+
+            #legal-links {
+                top: calc(50% + min(32.5vw, 250px) + 18px);
+                gap: 8px;
+            }
+
+            #legal-links a {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
 
             #loading-overlay {
 
@@ -567,97 +745,137 @@
 
 </head>
 
-
 <body>
 
-
     <!-- =====================================================
+
          UNITY CANVAS
+
          ===================================================== -->
 
     <canvas
+
         id="unity-canvas"
+
         tabindex="-1"
+
     ></canvas>
 
-
     <!-- =====================================================
+
          LOADING GAME
+
          ===================================================== -->
 
     <div id="loading-overlay">
 
         <div id="gameArea">
 
-
             <!-- PLAYER -->
 
             <div id="player">
 
                 <img
+
                     src="Logo.png"
+
                     draggable="false"
+
                     alt="Gateway Adventure"
+
                 >
 
             </div>
 
+            <!-- PRIVACY POLICY AND TERMS OF SERVICE -->
+            <div id="legal-links">
+                <a href="/PrivacyPolicy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="/TermsOfService" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+            </div>
 
             <!-- SCORE -->
-
             <div id="score">
+
                 XP Dots: 0
+
             </div>
 
         </div>
 
     </div>
 
-
     <!-- =====================================================
+
          UNITY LOADER
-         
+
          IMPORTANT:
+
          Unity automatically replaces
-         {{{ LOADER_FILENAME }}}
+
+         1f92abfcf6f79e01cd44930be2ef1296.loader.js
+
          with the correct loader filename.
+
          ===================================================== -->
 
-    <script src="Build/{{{ LOADER_FILENAME }}}"></script>
-
+    <script src="Build/1f92abfcf6f79e01cd44930be2ef1296.loader.js"></script>
 
     <script>
 
         /* =====================================================
+
            DOM
+
            ===================================================== */
 
         const loadingOverlay =
-            document.getElementById(
-                "loading-overlay"
-            );
 
+            document.getElementById(
+
+                "loading-overlay"
+
+            );
 
         const gameArea =
-            document.getElementById(
-                "gameArea"
-            );
 
+            document.getElementById(
+
+                "gameArea"
+
+            );
 
         const player =
-            document.getElementById(
-                "player"
-            );
 
+            document.getElementById(
+
+                "player"
+
+            );
 
         const score =
+
             document.getElementById(
+
                 "score"
+
             );
 
+        const legalLinks = document.getElementById("legal-links");
+
+        // Clicking a legal link must not trigger the game's pointer handler.
+        if (legalLinks) {
+            legalLinks.addEventListener("pointerdown", function (event) {
+                event.stopPropagation();
+            });
+            legalLinks.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+        }
 
         /* =====================================================
+
            CONFIGURATION
+
            ===================================================== */
 
         const CONFIG = {
@@ -674,9 +892,10 @@
 
         };
 
-
         /* =====================================================
+
            GAME STATE
+
            ===================================================== */
 
         let gameRunning = false;
@@ -697,43 +916,54 @@
 
         let areaRect = null;
 
-
         /* =====================================================
+
            UPDATE AREA SIZE
+
            ===================================================== */
 
         function updateAreaSize() {
 
             areaRect =
+
                 gameArea.getBoundingClientRect();
 
         }
 
-
         window.addEventListener(
-            "resize",
-            updateAreaSize
-        );
 
+            "resize",
+
+            updateAreaSize
+
+        );
 
         updateAreaSize();
 
-
         /* =====================================================
+
            CLAMP
+
            ===================================================== */
 
         function clamp(
+
             value,
+
             min,
+
             max
+
         ) {
 
             return Math.min(
 
                 Math.max(
+
                     value,
+
                     min
+
                 ),
 
                 max
@@ -742,29 +972,34 @@
 
         }
 
-
         /* =====================================================
+
            PLAYER POSITION
+
            ===================================================== */
 
         function setPlayerPosition(
+
             x,
+
             y
+
         ) {
 
             playerX = x;
 
             playerY = y;
 
-
             player.style.transform =
+
                 `translate(${x}px, ${y}px)`;
 
         }
 
-
         /* =====================================================
+
            RANDOM SPEED
+
            ===================================================== */
 
         function randomSpeed() {
@@ -774,33 +1009,41 @@
                 CONFIG.minSpeed +
 
                 Math.random() *
+
                 (
+
                     CONFIG.maxSpeed -
+
                     CONFIG.minSpeed
+
                 );
 
-
             return Math.random() > 0.5
+
                 ? speed
+
                 : -speed;
 
         }
 
-
         /* =====================================================
+
            UPDATE SCORE
+
            ===================================================== */
 
         function updateScore() {
 
             score.textContent =
-                `XP Dots: ${xpDots}`;
+
+                `dots: ${xpDots}`;
 
         }
 
-
         /* =====================================================
+
            SPAWN ENEMY
+
            ===================================================== */
 
         function spawnEnemy() {
@@ -811,37 +1054,46 @@
 
             }
 
-
             const enemyElement =
+
                 document.createElement(
+
                     "div"
+
                 );
 
-
             enemyElement.className =
-                "enemy";
 
+                "enemy";
 
             const maxX =
 
                 Math.max(
-                    0,
-                    areaRect.width -
-                    CONFIG.enemySize
-                );
 
+                    0,
+
+                    areaRect.width -
+
+                    CONFIG.enemySize
+
+                );
 
             const maxY =
 
                 Math.max(
+
                     0,
+
                     areaRect.height -
+
                     CONFIG.enemySize
+
                 );
 
+            /**
 
-            /*
                 Spawn near top center.
+
             */
 
             const x =
@@ -849,6 +1101,7 @@
                 clamp(
 
                     areaRect.width / 2 -
+
                     CONFIG.enemySize / 2,
 
                     0,
@@ -857,15 +1110,17 @@
 
                 );
 
-
             const y =
 
                 clamp(
-                    60,
-                    0,
-                    maxY
-                );
 
+                    60,
+
+                    0,
+
+                    maxY
+
+                );
 
             const enemy = {
 
@@ -881,20 +1136,21 @@
 
             };
 
-
             enemyElement.style.transform =
+
                 `translate(${enemy.x}px, ${enemy.y}px)`;
 
-
             gameArea.appendChild(
-                enemyElement
-            );
 
+                enemyElement
+
+            );
 
             enemies.push(
-                enemy
-            );
 
+                enemy
+
+            );
 
             xpDots++;
 
@@ -902,9 +1158,10 @@
 
         }
 
-
         /* =====================================================
+
            UPDATE ENEMIES
+
            ===================================================== */
 
         function updateEnemies() {
@@ -912,29 +1169,36 @@
             const maxX =
 
                 Math.max(
-                    0,
-                    areaRect.width -
-                    CONFIG.enemySize
-                );
 
+                    0,
+
+                    areaRect.width -
+
+                    CONFIG.enemySize
+
+                );
 
             const maxY =
 
                 Math.max(
+
                     0,
+
                     areaRect.height -
+
                     CONFIG.enemySize
+
                 );
 
-
             for (
+
                 const enemy of enemies
+
             ) {
 
                 enemy.x += enemy.vx;
 
                 enemy.y += enemy.vy;
-
 
                 if (
 
@@ -945,16 +1209,20 @@
                 ) {
 
                     enemy.x =
+
                         clamp(
+
                             enemy.x,
+
                             0,
+
                             maxX
+
                         );
 
                     enemy.vx *= -1;
 
                 }
-
 
                 if (
 
@@ -965,27 +1233,33 @@
                 ) {
 
                     enemy.y =
+
                         clamp(
+
                             enemy.y,
+
                             0,
+
                             maxY
+
                         );
 
                     enemy.vy *= -1;
 
                 }
 
-
                 enemy.element.style.transform =
+
                     `translate(${enemy.x}px, ${enemy.y}px)`;
 
             }
 
         }
 
-
         /* =====================================================
+
            COLLISION
+
            ===================================================== */
 
         function checkCollision() {
@@ -993,54 +1267,59 @@
             const playerCenterX =
 
                 playerX +
-                CONFIG.playerSize / 2;
 
+                CONFIG.playerSize / 2;
 
             const playerCenterY =
 
                 playerY +
-                CONFIG.playerSize / 2;
 
+                CONFIG.playerSize / 2;
 
             const collisionDistance =
 
                 CONFIG.playerSize / 2 +
+
                 CONFIG.enemySize / 2;
 
-
             for (
+
                 const enemy of enemies
+
             ) {
 
                 const enemyCenterX =
 
                     enemy.x +
-                    CONFIG.enemySize / 2;
 
+                    CONFIG.enemySize / 2;
 
                 const enemyCenterY =
 
                     enemy.y +
-                    CONFIG.enemySize / 2;
 
+                    CONFIG.enemySize / 2;
 
                 const dx =
 
                     playerCenterX -
-                    enemyCenterX;
 
+                    enemyCenterX;
 
                 const dy =
 
                     playerCenterY -
-                    enemyCenterY;
 
+                    enemyCenterY;
 
                 if (
 
                     Math.hypot(
+
                         dx,
+
                         dy
+
                     ) < collisionDistance
 
                 ) {
@@ -1051,34 +1330,36 @@
 
             }
 
-
             return false;
 
         }
 
-
         /* =====================================================
+
            CLEAR ENEMIES
+
            ===================================================== */
 
         function clearEnemies() {
 
             for (
+
                 const enemy of enemies
+
             ) {
 
                 enemy.element.remove();
 
             }
 
-
             enemies = [];
 
         }
 
-
         /* =====================================================
+
            END GAME
+
            ===================================================== */
 
         function endGame() {
@@ -1087,45 +1368,52 @@
 
             dragging = false;
 
-
             cancelAnimationFrame(
-                animationFrame
-            );
 
+                animationFrame
+
+            );
 
             clearInterval(
-                spawnTimer
-            );
 
+                spawnTimer
+
+            );
 
             clearEnemies();
 
+            /**
 
-            /*
                 Keep the final XP score.
+
             */
 
             updateScore();
 
+            /**
 
-            /*
                 Return logo to loading animation.
+
             */
 
             player.classList.remove(
+
                 "game-mode"
+
             );
 
-
             player.style.removeProperty(
+
                 "transform"
+
             );
 
         }
 
-
         /* =====================================================
+
            GAME LOOP
+
            ===================================================== */
 
         function gameLoop() {
@@ -1136,9 +1424,7 @@
 
             }
 
-
             updateEnemies();
-
 
             if (checkCollision()) {
 
@@ -1148,152 +1434,193 @@
 
             }
 
-
             animationFrame =
+
                 requestAnimationFrame(
+
                     gameLoop
+
                 );
 
         }
 
-
         /* =====================================================
+
            START NEW GAME
+
            ===================================================== */
 
         function startGame(
+
             clientX,
+
             clientY
+
         ) {
 
-            cancelAnimationFrame(
-                animationFrame
-            );
+            // Hide the legal links once the player starts the game.
+            if (legalLinks) {
+                legalLinks.classList.add("hidden");
+            }
 
+
+            cancelAnimationFrame(
+
+                animationFrame
+
+            );
 
             clearInterval(
-                spawnTimer
-            );
 
+                spawnTimer
+
+            );
 
             clearEnemies();
 
-
             updateAreaSize();
 
+            /**
 
-            /*
                 Reset score for NEW ROUND.
+
             */
 
             xpDots = 0;
 
             updateScore();
 
-
             gameRunning = true;
 
+            /**
 
-            /*
                 Turn logo into player.
+
             */
 
             player.classList.add(
+
                 "game-mode"
+
             );
 
-
             score.style.display =
-                "block";
 
+                "block";
 
             const x =
 
                 clamp(
 
                     clientX -
+
                     areaRect.left -
+
                     CONFIG.playerSize / 2,
 
                     0,
 
                     Math.max(
+
                         0,
+
                         areaRect.width -
+
                         CONFIG.playerSize
+
                     )
 
                 );
-
 
             const y =
 
                 clamp(
 
                     clientY -
+
                     areaRect.top -
+
                     CONFIG.playerSize / 2,
 
                     0,
 
                     Math.max(
+
                         0,
+
                         areaRect.height -
+
                         CONFIG.playerSize
+
                     )
 
                 );
 
-
             setPlayerPosition(
+
                 x,
+
                 y
+
             );
 
+            /**
 
-            /*
                 First enemy immediately.
+
             */
 
             spawnEnemy();
 
+            /**
 
-            /*
                 Continue spawning.
+
             */
 
             spawnTimer =
 
                 setInterval(
+
                     spawnEnemy,
+
                     CONFIG.enemySpawnInterval
+
                 );
 
+            /**
 
-            /*
                 Start game loop.
+
             */
 
             animationFrame =
+
                 requestAnimationFrame(
+
                     gameLoop
+
                 );
 
         }
 
-
         /* =====================================================
+
            PLAYER HIT TEST
+
            ===================================================== */
 
         function playerContainsPoint(
+
             clientX,
+
             clientY
+
         ) {
 
             const rect =
-                player.getBoundingClientRect();
 
+                player.getBoundingClientRect();
 
             return (
 
@@ -1309,14 +1636,18 @@
 
         }
 
-
         /* =====================================================
+
            MOVE PLAYER
+
            ===================================================== */
 
         function movePlayer(
+
             clientX,
+
             clientY
+
         ) {
 
             if (
@@ -1331,58 +1662,70 @@
 
             }
 
-
             updateAreaSize();
-
 
             const x =
 
                 clamp(
 
                     clientX -
+
                     areaRect.left -
+
                     CONFIG.playerSize / 2,
 
                     0,
 
                     Math.max(
+
                         0,
+
                         areaRect.width -
+
                         CONFIG.playerSize
+
                     )
 
                 );
-
 
             const y =
 
                 clamp(
 
                     clientY -
+
                     areaRect.top -
+
                     CONFIG.playerSize / 2,
 
                     0,
 
                     Math.max(
+
                         0,
+
                         areaRect.height -
+
                         CONFIG.playerSize
+
                     )
 
                 );
 
-
             setPlayerPosition(
+
                 x,
+
                 y
+
             );
 
         }
 
-
         /* =====================================================
+
            POINTER DOWN
+
            ===================================================== */
 
         gameArea.addEventListener(
@@ -1391,42 +1734,52 @@
 
             function(event) {
 
-                /*
+                /**
+
                     Start a new game when the
+
                     game is not running.
+
                 */
 
                 if (!gameRunning) {
 
                     startGame(
-                        event.clientX,
-                        event.clientY
-                    );
 
+                        event.clientX,
+
+                        event.clientY
+
+                    );
 
                     dragging = true;
 
-
                     gameArea.setPointerCapture(
-                        event.pointerId
-                    );
 
+                        event.pointerId
+
+                    );
 
                     return;
 
                 }
 
+                /**
 
-                /*
                     Only grab the player
+
                     while game is running.
+
                 */
 
                 if (
 
                     !playerContainsPoint(
+
                         event.clientX,
+
                         event.clientY
+
                     )
 
                 ) {
@@ -1435,27 +1788,30 @@
 
                 }
 
-
                 dragging = true;
 
-
                 gameArea.setPointerCapture(
+
                     event.pointerId
+
                 );
 
-
                 movePlayer(
+
                     event.clientX,
+
                     event.clientY
+
                 );
 
             }
 
         );
 
-
         /* =====================================================
+
            POINTER MOVE
+
            ===================================================== */
 
         gameArea.addEventListener(
@@ -1470,38 +1826,44 @@
 
                 }
 
-
                 movePlayer(
+
                     event.clientX,
+
                     event.clientY
+
                 );
 
             }
 
         );
 
-
         /* =====================================================
+
            POINTER UP
+
            ===================================================== */
 
         function stopDragging(event) {
 
             dragging = false;
 
-
             try {
 
                 if (
 
                     gameArea.hasPointerCapture(
+
                         event.pointerId
+
                     )
 
                 ) {
 
                     gameArea.releasePointerCapture(
+
                         event.pointerId
+
                     );
 
                 }
@@ -1510,69 +1872,95 @@
 
             catch (error) {
 
-                /*
+                /**
+
                     Ignore pointer capture errors.
+
                 */
 
             }
 
         }
 
-
         gameArea.addEventListener(
+
             "pointerup",
-            stopDragging
-        );
 
+            stopDragging
+
+        );
 
         gameArea.addEventListener(
-            "pointercancel",
-            stopDragging
-        );
 
+            "pointercancel",
+
+            stopDragging
+
+        );
 
         /* =====================================================
+
            UNITY
+
            =====================================================
 
            IMPORTANT:
 
            These variables are automatically replaced
+
            by Unity when this file is used as a
+
            WebGL template.
 
            You no longer need to manually change
+
            the hashed filenames after every build.
+
            ===================================================== */
 
         createUnityInstance(
 
             document.querySelector(
+
                 "#unity-canvas"
+
             ),
 
             {
 
                 dataUrl:
-                    "Build/{{{ DATA_FILENAME }}}",
+
+                    "Build/9e4e726bc1efa90adea2fb810e7ed283.data.unityweb",
 
                 frameworkUrl:
-                    "Build/{{{ FRAMEWORK_FILENAME }}}",
+
+                    "Build/cfdf6f0174f6cb8655bd2529fbf43a73.framework.js.unityweb",
 
                 codeUrl:
-                    "Build/{{{ CODE_FILENAME }}}",
+
+                    "Build/1ffef101083469a88823fea1f9b0803f.wasm.unityweb",
 
                 streamingAssetsUrl:
+
                     "StreamingAssets",
 
                 companyName:
+
                     "Gateway Adventure",
 
                 productName:
+
                     "Gateway Adventure",
 
                 productVersion:
-                    "2026090500"
+
+                    "2026090500",
+
+                // Keep Unity's drawing buffer matched to the full-screen canvas.
+                matchWebGLToCanvasSize: true,
+
+                // Avoid excessive backing-buffer scaling on high-DPI displays.
+                devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
 
             }
 
@@ -1582,40 +1970,48 @@
 
             function() {
 
-                /*
+                /**
+
                     Unity finished loading.
+
                 */
 
                 gameRunning = false;
 
                 dragging = false;
 
-
                 cancelAnimationFrame(
-                    animationFrame
-                );
 
+                    animationFrame
+
+                );
 
                 clearInterval(
-                    spawnTimer
-                );
 
+                    spawnTimer
+
+                );
 
                 clearEnemies();
 
+                /**
 
-                /*
                     Fade loading screen out.
+
                 */
 
                 loadingOverlay.classList.add(
+
                     "fade-out"
+
                 );
 
+                /**
 
-                /*
                     Remove loading screen
+
                     after animation.
+
                 */
 
                 setTimeout(
@@ -1623,7 +2019,9 @@
                     function() {
 
                         if (
+
                             loadingOverlay
+
                         ) {
 
                             loadingOverlay.remove();
@@ -1645,14 +2043,19 @@
             function(message) {
 
                 console.error(
+
                     "Unity failed to load:",
+
                     message
+
                 );
 
-
                 alert(
+
                     "Unity failed to load:\n\n" +
+
                     message
+
                 );
 
             }
